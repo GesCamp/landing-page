@@ -1,10 +1,80 @@
-.container{
-    display: grid;
-    justify-items: center;
-}
 
-img{
-    width: 75%;
-    height: 75%;
-    object-fit: cover;
-}
+    
+    .custom-nav {
+        li {
+            text-transform: uppercase;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+    
+        a {
+            border-bottom: 2px solid transparent;
+            padding:0;
+        }
+        a:hover {
+            color: red !important;
+            border-bottom: 2px solid red;
+        }
+    }
+    
+    .slide {
+        img {
+            width: 100%;
+        }
+    }
+    
+    .block {
+        display: flex;
+        padding: 16px;
+        flex-direction: column;
+        h4 {
+            margin-bottom: 0px;
+        }
+    }
+    
+    .picsum-img-wrapper {
+        max-height: 80vh; /* Altura fija para el contenedor */
+        overflow: hidden;
+        position: relative;
+        margin-top: -64px;
+      }
+    
+    
+      .parallax-img {
+        transform: translate3d(0, 0, 0);
+        will-change: transform; /* Optimiza la animación */
+      }
+    
+      .sticky-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000; /* Esto asegura que la barra de navegación esté encima del resto del contenido */
+        background-color: #fff; /* O cualquier otro color que desees para el fondo */
+         border-bottom: 3px solid red;
+      }
+    
+      .separator-img {
+        width: 100%;
+        position: relative;
+      }
+    .tarjeta-contacto{
+      @media (max-width: 768px) {
+        /* Aplica aquí tus estilos para pantallas menores de 700px */
+        margin-top: 20px;
+        /* ... otros estilos ... */
+      }
+    }
+    .tarjeta-contacto{
+      background-color: #ff0000!important;
+      a i{
+      color: rgb(187, 187, 187)!important;
+    }}
+    .tarjeta-rrss{
+      height: 2rem;
+      justify-items: center;
+      padding-top: .25rem;
+      a i{
+        text-shadow: 2px 2px 5px rgb(173, 173, 173);
+      }
+    }
+    

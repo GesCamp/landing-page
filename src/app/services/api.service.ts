@@ -31,21 +31,6 @@ export class WordpressService {
     }
   }
 
-  getPosts(): Observable<any[]> {
-    const headers = this.getHeaders();
-    return this.http
-      .get<any[]>(
-        `${environments.baseBomberosMalalhueUrl}posts?_embed&per_page=9`,
-        { headers }
-      )
-      .pipe(
-        catchError((error) => {
-          console.error('Error fetching posts:', error);
-          return throwError(() => new Error('Error fetching posts'));
-        })
-      );
-  }
-
   getPost(id: number): Observable<any> {
     const headers = this.getHeaders();
     return this.http
@@ -115,7 +100,7 @@ export class WordpressService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); // Log para debugging
+      console.error(error);
       return of(result as T);
     };
   }

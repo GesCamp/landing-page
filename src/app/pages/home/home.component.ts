@@ -10,6 +10,7 @@ import { WordpressService } from '../../services/api.service';
 import { RouterModule } from '@angular/router';
 import { FloatInputComponent } from '../../shared/components/float-input/float-input.component';
 import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
+import { GetAllPostsService } from '../../services/post';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private wordpressService: WordpressService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private readonly getPostsService: GetAllPostsService
   ) {
     this.contactForm = this.fb.group({
       nombres: ['', Validators.required],
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
 
   posts: any[] = [];
   ngOnInit(): void {
-    this.wordpressService.getPosts().subscribe((posts) => {
+    this.getPostsService.getPosts().subscribe((posts) => {
       this.posts = posts;
       this.isLoading = false;
     });

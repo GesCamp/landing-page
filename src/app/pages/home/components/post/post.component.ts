@@ -4,6 +4,7 @@ import { WordpressService } from '../../../../services/api.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LinksHomeComponent } from '../../../../shared/components/links-home/links-home.component';
+import { GetAllPostsService } from '../../../../services/post';
 
 @Component({
   selector: 'app-post',
@@ -15,7 +16,7 @@ import { LinksHomeComponent } from '../../../../shared/components/links-home/lin
 export class PostComponent implements OnInit {
   posts$: Observable<any[]> | undefined;
   constructor(
-    private postsService: WordpressService,
+    private postsService: GetAllPostsService,
     private datePipe: DatePipe
   ) {}
 

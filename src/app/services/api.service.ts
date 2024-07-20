@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  map,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { environments } from './environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WordpressService {
-  private authUrl = 'https://cbmalalhue.cl/wp/wp-json/jwt-auth/v1/token';
   private token: string | null = null;
   private username = 'admin';
   private password = 'adminBomberos2024';
@@ -25,7 +32,7 @@ export class WordpressService {
 
   private authenticate(username: string, password: string): Observable<any> {
     const body = { username, password };
-    return this.http.post<any>(this.authUrl, body).pipe(
+    return this.http.post<any>(environments.authUrl, body).pipe(
       tap((response) => (this.token = response.token)),
       catchError(this.handleError<any>('authenticate', null))
     );
@@ -43,13 +50,19 @@ export class WordpressService {
   }
   getPosts(): Observable<any[]> {
     const headers = this.getHeaders();
-    console.log(headers);
-    return this.http.get<any[]>(
-      `${environments.baseBomberosMalalhueUrl}posts?_embed`,
-      {
-        headers,
-      }
-    );
+    return this.http
+      .get<any[]>(
+        `${environments.baseBomberosMalalhueUrl}posts?_embed&per_page=9`,
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching posts:', error);
+          return throwError(() => new Error('Error fetching posts'));
+        })
+      );
   }
 
   getPost(id: number): Observable<any> {

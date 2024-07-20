@@ -26,6 +26,7 @@ import { IndexCarouselComponent } from '../../shared/components/index-carousel/i
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  isLoading: boolean = true;
   images = [
     { path: 'assets/images/1.jpg' },
     { path: 'assets/images/2.jpg' },
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.wordpressService.getPosts().subscribe((posts) => {
       this.posts = posts;
+      this.isLoading = false;
     });
   }
 

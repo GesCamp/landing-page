@@ -61,37 +61,42 @@
   <div class="container py-4">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        <h3 class="text-center">Novedades</h3>
+        <h3 class="text-center">Noticias</h3>
       </div>
     </div>
+    @if(isLoading){
+    <div class="spinners">
+      <div
+        class="spinner-grow text-danger"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only text-center">Loading...</span>
+      </div>
+      <div
+        class="spinner-grow text-warning"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only text-center">Loading...</span>
+      </div>
+      <div
+        class="spinner-grow text-success"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only text-center">Loading...</span>
+      </div>
+      <div
+        class="spinner-grow text-info"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only text-center">Loading...</span>
+      </div>
+    </div>
+    } @if(!isLoading){
     <div class="row">
-      <!-- <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of items">
-          <div
-            class="row m-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative bg-light"
-          >
-            <div
-              class="col-12 d-flex align-items-center justify-content-center p-0"
-            >
-              <img
-                src="https://lanco.cl/wp-content/uploads/2023/07/bomberos-en-el-culto-768x576.png"
-                alt="Random first slide"
-                class="img-fluid rounded"
-                style="max-width: 105%; height: auto"
-              />
-            </div>
-            <div class="col-12 py-2">
-              <span class="badge bg-danger" style="width: auto">General</span>
-            </div>
-            <div class="col-12 d-flex flex-column position-static mb-2">
-              <h3 class="mb-1">Con motivo de su aniversario, Bomberos de Malalhue...</h3>
-              <div class="mb-1 text-muted">31 Julio, 2023</div>
-              <p class="mb-2">
-                En el marco de la conmemoración de los 57 años de la fundación del Cuerpo de Bomberos de la localidad de Malalhue, se participó de un oficio religioso, ...
-              </p>
-              <a [routerLink]="'/noticia/' + 'test'" class="btn btn-outline-danger">Continuar leyendo</a>
-            </div>
-          </div>
-        </div> -->
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of posts">
         <div
           class="row m-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative bg-light"
@@ -133,6 +138,7 @@
         </div>
       </div>
     </div>
+    }
   </div>
 </section>
 <section class="section-blog">

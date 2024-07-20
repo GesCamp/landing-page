@@ -86,3 +86,13 @@
       /* ... otros estilos ... */
   }
 }
+
+.spinners{
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+.spinners div{
+  text-align: center;
+  margin: 0rem 0.2rem;
+}

@@ -1,0 +1,185 @@
+<!-- <app-header></app-header> -->
+<div class="bg-danger text-white">
+  <div class="container">
+    <div class="p-4 d-flex align-items-center">
+      <div>CUERPO DE BOMBEROS MALALHUE</div>
+    </div>
+  </div>
+  <!-- <div>
+        Emergencias: +56(63)2316232
+    </div> -->
+</div>
+
+<div class="mobile-menu-overlay" [class.active]="mobileMenuOpen">
+  <button class="close-button" (click)="closeMobileMenu()">
+    <i class="fas fa-times"></i>
+  </button>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a
+        routerLink="/inicio"
+        class="nav-link link-body-emphasis px-2 active"
+        aria-current="page"
+        >Inicio</a
+      >
+    </li>
+    <li class="nav-item">
+      <a routerLink="/novedades" class="nav-link link-body-emphasis px-2"
+        >Novedades</a
+      >
+    </li>
+    <li class="nav-item">
+      <a routerLink="/companies" class="nav-link link-body-emphasis px-2"
+        >Compañias</a
+      >
+    </li>
+    <li class="nav-item">
+      <a routerLink="/inicio?#postular" class="nav-link link-body-emphasis px-2"
+        >Postular</a
+      >
+    </li>
+    <li class="nav-item">
+      <a routerLink="/inicio?#contacto" class="nav-link link-body-emphasis px-2"
+        >Contacto</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        href="https://cbmalalhue.cl:2096/"
+        target="_blank"
+        class="nav-link link-body-emphasis px-2 btn btn-warnig bg-warning"
+        >Ir a email</a
+      >
+    </li>
+  </ul>
+</div>
+
+<nav class="py-2 sticky-nav sticky-top">
+  <div class="container d-flex justify-content-between">
+    <div
+      class="d-flex align-items-center mb-0 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none"
+    >
+      <a class="navbar-brand" href="#">
+        <img
+          src="../../assets/images/companias/superintendencia.png"
+          alt="logo1"
+          style="height: 80px"
+        />
+      </a>
+      <a class="navbar-brand" href="#">
+        <img
+          src="../../assets/images/companias/comandancia.jpg"
+          alt="logo2"
+          style="height: 80px"
+        />
+      </a>
+    </div>
+    <ul class="nav d-flex align-items-center custom-nav d-lg-none">
+      <li class="nav-item">
+        <button
+          class="navbar-toggler d-block d-lg-none"
+          type="button"
+          (click)="toggleMobileMenu()"
+        >
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+      </li>
+    </ul>
+    <ul
+      class="nav ml-auto d-flex align-items-center custom-nav movile-nav d-none d-lg-flex"
+    >
+      <li class="nav-item">
+        <a
+          routerLink="/inicio"
+          class="nav-link link-body-emphasis px-2 active"
+          aria-current="page"
+          >Inicio</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/novedades" class="nav-link link-body-emphasis px-2"
+          >Novedades</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/companies" class="nav-link link-body-emphasis px-2"
+          >Compañias</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/inicio?#postular"
+          class="nav-link link-body-emphasis px-2"
+          >Postular</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/inicio?#contacto"
+          class="nav-link link-body-emphasis px-2"
+          >Contacto</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="https://cbmalalhue.cl:2096/"
+          target="_blank"
+          class="nav-link link-body-emphasis px-2 btn btn-warning bg-warning"
+          >Ir a email</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer py-4 bg-dark text-white mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <h4>Volver a ver</h4>
+        <ul class="list-unstyled">
+          <li><a href="#home" class="text-white">Inicio</a></li>
+          <li><a href="/novedades" class="text-white">Novedades</a></li>
+          <li><a href="#home" class="text-white">Compañias</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6 text-center">
+        <h4>Sé parte de nosotros</h4>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white">Postular</a></li>
+          <li><a href="#" class="text-white">Contáctanos</a></li>
+          <li><a href="#" class="text-white">Donar a bomberos Malalhue</a></li>
+        </ul>
+      </div>
+      <div class="col-md-12 text-center">
+        <h4>Bomberos Malalhue</h4>
+        <p>
+          Gente siempre dispuesta a ayudarte
+          <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <!-- Social Icons -->
+      </div>
+      <div class="col-md-12 text-center">
+        <p class="copyright">
+          Diseñado por
+          <a href="https://devom.cl/" class="text-decoration-none text-danger"
+            >Devom.cl</a
+          >
+          © 2024, Todos los derechos reservados
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- <app-footer></app-footer> -->

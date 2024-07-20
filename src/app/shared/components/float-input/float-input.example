@@ -1,0 +1,50 @@
+<app-float-input 
+  [title]="'Contraseña'" 
+  [type]="'password'"
+  [control]="loginForm.get('password')" 
+  [requiredText]="'Este campo es requerido'" 
+  [hint]="'Por favor, introduce tu contraseña'">
+</app-float-input>
+
+<app-float-input 
+  [title]="'Correo Electrónico'" 
+  [type]="'email'"
+  [control]="loginForm.get('email')" 
+  [requiredText]="'Este campo es requerido'" 
+  [hint]="'Por favor, introduce tu correo electrónico'">
+</app-float-input>
+
+<app-float-input 
+  [title]="'Selección'" 
+  [type]="'select'"
+  [control]="loginForm.get('selection')" 
+  [requiredText]="'Este campo es requerido'" 
+  [hint]="'Por favor, selecciona una opción'"
+  [options]="[{ value: '1', label: 'Opción 1' }, { value: '2', label: 'Opción 2' }]">
+</app-float-input>
+
+<app-float-input 
+  [title]="'Radio Buttons'" 
+  [type]="'radio'"
+  [control]="loginForm.get('radios')" 
+  [requiredText]="'Por favor, selecciona una opción'" 
+  [hint]="'Por favor, selecciona una opción'"
+  [options]="[{ value: '1', label: 'Opción 1' }, { value: '2', label: 'Opción 2' }]"
+  [radioName]="'radioGroup'">
+</app-float-input>
+
+<app-float-input 
+  [title]="'Checkbox'" 
+  [type]="'checkbox'"
+  [control]="loginForm.get('checkbox')" 
+  [requiredText]="'Este campo es requerido'" 
+  [hint]="'Marca esta casilla'">
+</app-float-input>
+
+<app-float-input 
+  [title]="'Texto'" 
+  [type]="'textarea'"
+  [control]="loginForm.get('text')" 
+  [requiredText]="'Este campo es requerido'" 
+  [hint]="'Por favor, introduce un texto'">
+</app-float-input>

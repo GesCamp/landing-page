@@ -1,21 +1,35 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { WordpressService } from '../../services/api.service';
+import { RouterModule } from '@angular/router';
+import { FloatInputComponent } from '../../shared/components/float-input/float-input.component';
+import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FloatInputComponent,
+    IndexCarouselComponent,
+  ],
   providers: [DatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   images = [
-    { path: 'assets/1.jpg' },
-    { path: 'assets/2.jpg' },
-    { path: 'assets/3.jpg' },
+    { path: 'assets/images/1.jpg' },
+    { path: 'assets/images/2.jpg' },
+    { path: 'assets/images/3.jpg' },
   ];
   contactForm!: FormGroup;
   constructor(

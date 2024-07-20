@@ -9,7 +9,7 @@ import { environments } from './environments';
 export class WordpressService {
   private authUrl = 'https://cbmalalhue.cl/wp/wp-json/jwt-auth/v1/token';
   private token: string | null = null;
-  private username = 'admin'; // Reemplaza con tu nombre de usuario
+  private username = 'admin';
   private password = 'adminBomberos2024';
 
   constructor(private http: HttpClient) {
@@ -24,7 +24,6 @@ export class WordpressService {
   }
 
   private authenticate(username: string, password: string): Observable<any> {
-    console.log(username, password);
     const body = { username, password };
     return this.http.post<any>(this.authUrl, body).pipe(
       tap((response) => (this.token = response.token)),

@@ -1,0 +1,22 @@
+<div class="carousel-container">
+  <igx-carousel #carousel>
+    <igx-slide *ngFor="let image of images; let i = index">
+      <div
+        class="picsum-img-wrapper"
+        style="max-height: 650px; object-position: center"
+      >
+        <img
+          [src]="image.path"
+          alt="Slide {{ i + 1 }}"
+          class="parallax-img img-fluid"
+          style="object-position: center"
+        />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ getCaptionTitle(i) }}</h3>
+        <p>{{ getCaptionDescription(i) }}</p>
+      </div>
+      <ng-template igxCarouselIndicator></ng-template>
+    </igx-slide>
+  </igx-carousel>
+</div>

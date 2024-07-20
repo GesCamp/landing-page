@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 col-lg-9">
+      <div class="row">
+        <div
+          class="col-12 col-md-6 col-lg-6 col-xl-4"
+          *ngFor="let post of posts$ | async"
+        >
+          <div
+            class="row m-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative bg-light"
+          >
+            <div
+              class="col-12 d-flex align-items-center justify-content-center p-0"
+              style="max-height: 230px; overflow: hidden"
+              *ngIf="getFeaturedImage(post)"
+            >
+              <img
+                [src]="getFeaturedImage(post)"
+                alt="Post Image"
+                class="img-fluid rounded"
+                style="max-width: 100%; height: auto; object-fit: cover"
+              />
+            </div>
+            <div class="col-12 py-2">
+              <span
+                *ngFor="let category of getCategories(post)"
+                class="badge bg-danger mx-1"
+                >{{ category }}</span
+              >
+            </div>
+            <div class="col-12 d-flex flex-column position-static mb-2">
+              <h3 class="mb-1">
+                {{ truncateText(post.title.rendered, 50) }}
+              </h3>
+              <div class="mb-1 text-muted">{{ formatDate(post.date) }}</div>
+              <p
+                class="mb-2"
+                [innerHTML]="truncateText(post.excerpt.rendered, 200)"
+              ></p>
+              <a
+                [routerLink]="['/noticia', post.slug]"
+                class="btn btn-outline-danger"
+                >Continuar leyendo</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12">
+      <app-links-home></app-links-home>
+    </div>
+  </div>
+</div>

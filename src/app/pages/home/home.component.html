@@ -1,58 +1,4 @@
-<div class="">
-  <ngb-carousel *ngIf="images">
-    <ng-template ngbSlide>
-      <div
-        class="picsum-img-wrapper"
-        style="max-height: 650px; object-position: center"
-      >
-        <img
-          [src]="images[0].path"
-          alt="Random first slide"
-          class="parallax-img img-fluid"
-          style="object-position: center"
-        />
-      </div>
-      <div class="carousel-caption">
-        <h3>Incendio de Futa</h3>
-        <p>Bomberos de Malalhue, trabajando en Incendio de Forestal.</p>
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div
-        class="picsum-img-wrapper"
-        style="max-height: 650px; object-position: center"
-      >
-        <img
-          [src]="images[1].path"
-          alt="Random second slide"
-          class="parallax-img img-fluid"
-          style="object-position: center"
-        />
-      </div>
-      <div class="carousel-caption">
-        <h3>Ceremonia Bomberos</h3>
-        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div
-        class="picsum-img-wrapper"
-        style="max-height: 650px; object-position: center"
-      >
-        <img
-          [src]="images[2].path"
-          alt="Random third slide"
-          class="parallax-img img-fluid"
-          style="object-position: center"
-        />
-      </div>
-      <div class="carousel-caption">
-        <h3>Bomberos en acción</h3>
-        <!-- <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> -->
-      </div>
-    </ng-template>
-  </ngb-carousel>
-</div>
+<div class=""><app-index-carousel></app-index-carousel></div>
 
 <section class="section-emergency">
   <div class="container py-4">
@@ -179,7 +125,7 @@
               [innerHTML]="truncateText(item.excerpt.rendered, 200)"
             ></p>
             <a
-              [routerLink]="'/noticia/' + item.slug"
+              [routerLink]="['/noticia', item.slug]"
               class="btn btn-outline-danger"
               >Continuar leyendo</a
             >
@@ -305,10 +251,13 @@
 <section class="contacto" id="contacto">
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center py-5">
-        <h1>Contáctanos</h1>
+      <div class="container py-4">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h3 class="text-center">Contáctanos</h3>
+          </div>
+        </div>
       </div>
-
       <div class="col-md-6 col-12">
         <div class="contact-cont">
           <div class="contact-form">
@@ -377,7 +326,7 @@
             class="text-decoration-none text-light mb-2 height-10"
           >
             <i class="fas fa-envelope" aria-hidden="true"></i>
-            contacto@cbmalalhue.cl
+            <span>contacto&#64;cbmalalhue.cl</span>
           </a>
         </div>
         <div

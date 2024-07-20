@@ -1,26 +1,16 @@
+// src/app/services/wordpress.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {
-  Observable,
-  catchError,
-  map,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { Observable, catchError, map, of, switchMap, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 import { environments } from './environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WordpressService {
-  private token: string | null = null;
-  private username = 'admin';
-  private password = 'adminBomberos2024';
-
-  constructor(private http: HttpClient) {
-    this.authenticate(this.username, this.password).subscribe(
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.authService.authenticate().subscribe(
       (response) => {
         console.log('Authenticated successfully');
       },
@@ -30,32 +20,23 @@ export class WordpressService {
     );
   }
 
-  private authenticate(username: string, password: string): Observable<any> {
-    const body = { username, password };
-    return this.http.post<any>(environments.authUrl, body).pipe(
-      tap((response) => (this.token = response.token)),
-      catchError(this.handleError<any>('authenticate', null))
-    );
-  }
-
   private getHeaders(): HttpHeaders {
-    console.log(this.token);
-    if (this.token) {
+    const token = this.authService.getToken();
+    if (token) {
       return new HttpHeaders({
-        Authorization: 'Bearer ' + this.token,
+        Authorization: 'Bearer ' + token,
       });
     } else {
       return new HttpHeaders();
     }
   }
+
   getPosts(): Observable<any[]> {
     const headers = this.getHeaders();
     return this.http
       .get<any[]>(
         `${environments.baseBomberosMalalhueUrl}posts?_embed&per_page=9`,
-        {
-          headers,
-        }
+        { headers }
       )
       .pipe(
         catchError((error) => {
@@ -74,11 +55,10 @@ export class WordpressService {
       .pipe(
         switchMap((item) => {
           if (item.featured_media) {
-            console.log(item.featured_media);
             const mediaId = item.featured_media;
             return this.http
               .get<any>(
-                environments.baseBomberosMalalhueUrl + 'media/' + mediaId
+                `${environments.baseBomberosMalalhueUrl}media/${mediaId}`
               )
               .pipe(
                 map((media) => ({
@@ -97,11 +77,10 @@ export class WordpressService {
     const headers = this.getHeaders();
     return this.http.get<any>(
       `${environments.baseBomberosMalalhueUrl}pages/?slug=${id}`,
-      {
-        headers,
-      }
+      { headers }
     );
   }
+
   getPostBySlug(slug: string): Observable<any> {
     const headers = this.getHeaders();
     return this.http
@@ -133,7 +112,7 @@ export class WordpressService {
         })
       );
   }
-  // Manejo de errores
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // Log para debugging

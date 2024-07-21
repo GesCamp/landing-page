@@ -1,0 +1,30 @@
+<!-- <div class="position-relative overflow-hidden">
+  <div class="d-flex align-items-center justify-content-center fullscreen-image" style="max-height: 650px;object-position: center;">
+    <img src=" {{ viewCompanies.front_page }} " alt="Imagen a Pantalla Completa" class="parallax-img img-fluid" style="object-position: center;">
+  </div>
+</div> -->
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-8" [innerHTML]="company.content.rendered">
+        
+          <!-- <h1>{{ viewCompanies.name }}</h1>
+          <p class="text-muted">Fundada el {{ viewCompanies.foundation_date }}</p>
+          <img src="./assets/companias/primera.jpeg" alt="Imagen de la Noticia" class="img-fluid mb-4">
+
+          <div>
+              <p>{{ viewCompanies.description }}</p>
+          </div> -->
+          <!-- Resto del contenido -->
+      </div>
+      <div class="col-md-4">
+        <app-links-staff [name]="name"></app-links-staff>
+        <app-links-home></app-links-home>
+          <h3>Enlaces Relacionados</h3>
+          <ul>
+              <!-- <li *ngFor="let link of viewCompanies.relatedLinks">
+                  <a [href]="link.url">{{ link.name }}</a>
+              </li> -->
+          </ul>
+      </div>
+  </div>
+</div>

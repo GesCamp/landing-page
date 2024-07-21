@@ -1,4 +1,6 @@
 export const ApiTag = {
   POST: 'post',
-  POSTS: 'POSTS',
+  POSTS: 'posts',
+  COMPANIES: 'pages/?slug=company-',
+  MEDIA: 'media',
 };

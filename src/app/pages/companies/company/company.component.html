@@ -1,0 +1,29 @@
+@if(company){
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>{{ company.title.rendered }}</h2>
+      @if(featuredMedia?.source_url){
+      <div class="head">
+        <img
+          [src]="featuredMedia?.source_url"
+          alt="Featured Image"
+          class="shadow-sm p-3 mb-5 bg-body rounded"
+        />
+      </div>
+      }
+      <p class="text-muted">Publicado: {{ company.date }}</p>
+      <div class="content" [innerHTML]="company.content.rendered"></div>
+    </div>
+
+    <div class="col-md-4">
+      <app-links-staff></app-links-staff>
+      <app-links-home></app-links-home>
+      <h3>Enlaces Relacionados</h3>
+      <ul>
+        <!-- Lista de enlaces relacionados -->
+      </ul>
+    </div>
+  </div>
+</div>
+}

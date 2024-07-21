@@ -1,0 +1,86 @@
+<div class="position-relative overflow-hidden" style="max-height: 650px">
+  <div
+    class="d-flex align-items-center justify-content-center fullscreen-image"
+    style="max-height: 650px; object-position: center"
+  >
+    <img
+      src="./assets/images/companias/portadaCompany.jpeg"
+      alt="Imagen a Pantalla Completa"
+      class="parallax-img img-fluid"
+      style="object-position: center"
+    />
+  </div>
+</div>
+
+<section class="section-blog">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-12 text-center mb-4">
+        <h3 class="text-center">Compañias</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body bg-danger">
+            <h5 class="card-title text-light text-center">
+              Cuerpo de Bomberos Malalhue
+            </h5>
+            <a
+              [routerLink]="['/companies', 'directorio-general']"
+              class="btn btn-warning regular-button"
+              >Conócenos</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img
+            src="./assets/images/companias/primera.jpeg"
+            class="card-img-top"
+            alt="Primera Compañía"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Primera</h5>
+            <a [routerLink]="['/companies', 'primera']" class="btn btn-primary"
+              >Conoce más</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img
+            src="./assets/images/companias/segunda.jpg"
+            class="card-img-top"
+            alt="Segunda Compañía"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Segunda</h5>
+            <a [routerLink]="['/companies', 'segunda']" class="btn btn-primary"
+              >Conoce más</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img
+            src="./assets/images/companias/tercera.jpg"
+            class="card-img-top"
+            alt="Tercera Compañía"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Tercera</h5>
+            <a [routerLink]="['/companies', 'tercera']" class="btn btn-primary"
+              >Conoce más</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

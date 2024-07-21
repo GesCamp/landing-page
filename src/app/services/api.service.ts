@@ -9,16 +9,7 @@ import { environments } from './environments';
   providedIn: 'root',
 })
 export class WordpressService {
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.authService.authenticate().subscribe(
-      (response) => {
-        console.log('Authenticated successfully');
-      },
-      (error) => {
-        console.error('Authentication failed', error);
-      }
-    );
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();

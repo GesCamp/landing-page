@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   selector: 'app-links-staff',
   templateUrl: './links-staff.component.html',
-  styleUrls: ['./links-staff.component.scss'],
+  styleUrls: ['./links-staff.component.css'],
   imports: [RouterLink],
 })
 export class LinksStaffComponent {

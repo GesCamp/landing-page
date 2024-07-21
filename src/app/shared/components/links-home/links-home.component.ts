@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   standalone: true,
   selector: 'app-links-home',
   templateUrl: './links-home.component.html',
-  styleUrls: ['./links-home.component.scss'],
+  styleUrls: ['./links-home.component.css'],
 })
 export class LinksHomeComponent {}

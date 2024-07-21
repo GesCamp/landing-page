@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   selector: 'app-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss'],
+  styleUrls: ['./shell.component.css'],
   imports: [RouterModule, RouterOutlet, CommonModule, NgbModule],
 })
 export class ShellComponent {

@@ -10,6 +10,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { CardInterfaceDto } from '../../../../shared/interfaces/card-volunteer.dto';
 import { DirectoryDto } from '../../../../shared/interfaces/directory.dto';
+import { api } from '@igniteui/material-icons-extended';
+import { ApiTag } from '../../../../services/environments/api-tag/api-tag.enum';
 @Component({
   standalone: true,
   selector: 'app-directory',
@@ -43,31 +45,33 @@ export class DirectoryComponent implements OnInit {
   }
 
   loadDirectoryData(): void {
-    this.directoryService.getCompanyDetails(`directory-${this.name}`).subscribe(
-      (data: DirectoryDto[]) => {
-        if (data.length > 0) {
-          this.directory = data[0];
-          if (this.directory.content && this.directory.content.rendered) {
-            this.extractBusinessCards(this.directory.content.rendered);
-          } else {
-            console.warn(
-              'La propiedad "rendered" no está disponible en los datos de la compañía.'
-            );
+    this.directoryService
+      .getCompanyDetails(`${ApiTag.DIRECTORY}-${this.name}`)
+      .subscribe(
+        (data: DirectoryDto[]) => {
+          if (data.length > 0) {
+            this.directory = data[0];
+            if (this.directory.content && this.directory.content.rendered) {
+              this.extractBusinessCards(this.directory.content.rendered);
+            } else {
+              console.warn(
+                'La propiedad "rendered" no está disponible en los datos de la compañía.'
+              );
+            }
+            if (
+              this.directory._links &&
+              this.directory._links['wp:featuredmedia']
+            ) {
+              const featuredMediaUrl =
+                this.directory._links['wp:featuredmedia'][0].href;
+              this.loadFeaturedImage(featuredMediaUrl);
+            }
           }
-          if (
-            this.directory._links &&
-            this.directory._links['wp:featuredmedia']
-          ) {
-            const featuredMediaUrl =
-              this.directory._links['wp:featuredmedia'][0].href;
-            this.loadFeaturedImage(featuredMediaUrl);
-          }
+        },
+        (error) => {
+          console.error('Error al cargar los datos de la compañía:', error);
         }
-      },
-      (error) => {
-        console.error('Error al cargar los datos de la compañía:', error);
-      }
-    );
+      );
   }
 
   loadFeaturedImage(mediaUrl: string): void {

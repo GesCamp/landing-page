@@ -37,7 +37,6 @@ export class CompanyComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.name = params['nombre-company'];
-      console.log(this.name);
       this.loadCompanyData();
     });
   }

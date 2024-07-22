@@ -21,7 +21,7 @@ export const routes: Routes = [
         component: CompaniesComponent,
       },
       {
-        path: 'directorio-general',
+        path: 'directory/:nombre-company',
         component: DirectoryComponent,
         data: { title: 'Directorio' },
       },

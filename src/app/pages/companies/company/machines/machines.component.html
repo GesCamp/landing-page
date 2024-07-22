@@ -1,30 +1,43 @@
-<!-- <div class="position-relative overflow-hidden">
-  <div class="d-flex align-items-center justify-content-center fullscreen-image" style="max-height: 650px;object-position: center;">
-    <img src=" {{ viewCompanies.front_page }} " alt="Imagen a Pantalla Completa" class="parallax-img img-fluid" style="object-position: center;">
-  </div>
-</div> -->
+@if(machine){
 <div class="container mt-5">
   <div class="row">
-      <div class="col-md-8" [innerHTML]="company.content.rendered">
-        
-          <!-- <h1>{{ viewCompanies.name }}</h1>
-          <p class="text-muted">Fundada el {{ viewCompanies.foundation_date }}</p>
-          <img src="./assets/companias/primera.jpeg" alt="Imagen de la Noticia" class="img-fluid mb-4">
+    <div class="col-md-8">
+      <h3>{{ machine.title?.rendered }}</h3>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        @if(images){ @for(image of images; track image.id){
 
-          <div>
-              <p>{{ viewCompanies.description }}</p>
-          </div> -->
-          <!-- Resto del contenido -->
+        <div class="col">
+          <div class="machine-card shadow-lg mb-5 bg-body">
+            <img
+              [src]="image.src"
+              class="card-img-top image-machine"
+              alt="image.alt"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-taxi" aria-hidden="true"></i
+                >{{ image.caption }}
+              </h5>
+              <p class="card-text">
+                {{ image.alt }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        } }
       </div>
-      <div class="col-md-4">
-        <app-links-staff [name]="name"></app-links-staff>
-        <app-links-home></app-links-home>
-          <h3>Enlaces Relacionados</h3>
-          <ul>
-              <!-- <li *ngFor="let link of viewCompanies.relatedLinks">
-                  <a [href]="link.url">{{ link.name }}</a>
-              </li> -->
-          </ul>
-      </div>
+    </div>
+
+    <div class="col-md-4">
+      <app-links-staff [name]="name"></app-links-staff>
+      <app-links-home></app-links-home>
+      <h3>Enlaces Relacionados</h3>
+      <ul>
+        <!-- Lista de enlaces relacionados -->
+      </ul>
+    </div>
   </div>
 </div>
+
+}

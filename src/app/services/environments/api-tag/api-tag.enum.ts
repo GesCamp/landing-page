@@ -4,4 +4,5 @@ export const ApiTag = {
   COMPANIES: 'pages/?slug=company-',
   MEDIA: 'media',
   DIRECTORY: 'directory',
+  MACHINES: 'machines',
 };

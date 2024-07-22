@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environments } from '../environments';
 import { ApiTag } from '../environments/api-tag/api-tag.enum';
 import { CompaniesDto } from './interfaces';

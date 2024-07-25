@@ -6,6 +6,7 @@ import { CompaniesComponent } from './pages/companies/companies/companies.compon
 import { DirectoryComponent } from './pages/companies/company/directory/directory.component';
 import { CompanyComponent } from './pages/companies/company/company.component';
 import { MachinesComponent } from './pages/companies/company/machines/machines.component';
+import { VolunteersComponent } from './pages/companies/company/volunteers/volunteers.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -34,6 +35,11 @@ export const routes: Routes = [
       {
         path: 'machines/:nombre-company',
         component: MachinesComponent,
+        data: { title: 'Machines' },
+      },
+      {
+        path: 'volunteers/:nombre-company',
+        component: VolunteersComponent,
         data: { title: 'Machines' },
       },
     ],

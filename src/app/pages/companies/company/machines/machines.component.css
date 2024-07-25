@@ -20,20 +20,21 @@
   }
 
   .machine-card i{
-    color: brown;
+    color: #BF2A45;
     margin-right: 8px;
   }
   .machine-card .card-title{
     margin-top: 0;
     font-weight: 900;
     padding-left: 8px;
+    color: #022859
   }
   .machine-card .card-text{
     text-align: justify;
     width: 100%;
     margin-top: 0;
     font-weight: 900;
-    color: rgb(136, 136, 136);
+    color: #223240;
     object-fit: cover;
     height: 85px;
   }

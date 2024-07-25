@@ -29,22 +29,24 @@ h2{
   max-width: 300px;
   margin: 0px 5px;
   border-radius: 1rem;
+  background-color: #fff;
 }
 
 .business-card h5{
   font-size: 26px;
   margin: 0px;
   padding: 0px;
+  color: #022859
 }
 
 .business-card p{
   margin: 0px;
   padding: 0px;
   font-size: 16px;
-  color: rgb(136, 136, 136);
+  color: #022859;
 }
 ul span{
-  color: darkslateblue;
+  color: #223240;
   margin-left: 8px;
 }
 

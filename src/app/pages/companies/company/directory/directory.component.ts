@@ -10,7 +10,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { CardInterfaceDto } from '../../../../shared/interfaces/card-volunteer.dto';
 import { DirectoryDto } from '../../../../shared/interfaces/directory.dto';
-import { api } from '@igniteui/material-icons-extended';
 import { ApiTag } from '../../../../services/environments/api-tag/api-tag.enum';
 @Component({
   standalone: true,
@@ -31,11 +30,7 @@ export class DirectoryComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private directoryService: CompanieService,
     private readonly getMediaResource: GetMediaResourceService
-  ) {
-    this.route.params.subscribe((params) => {
-      this.name = params['nombre-company'];
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

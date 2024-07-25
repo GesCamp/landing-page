@@ -1,29 +1,43 @@
-<!-- <div class="position-relative overflow-hidden">
-  <div class="d-flex align-items-center justify-content-center fullscreen-image" style="max-height: 650px;object-position: center;">
-    <img src=" {{ viewCompanies.front_page }} " alt="Imagen a Pantalla Completa" class="parallax-img img-fluid" style="object-position: center;">
-  </div>
-</div> -->
-<div class="container mt-5">
+@if(directory){
+<div class="container mt-5" *ngIf="directory">
   <div class="row">
-    <div class="col-md-8" [innerHTML]="company.content.rendered">
-      <!-- <h1>{{ viewCompanies.name }}</h1>
-          <p class="text-muted">Fundada el {{ viewCompanies.foundation_date }}</p>
-          <img src="./assets/companias/primera.jpeg" alt="Imagen de la Noticia" class="img-fluid mb-4">
-
-          <div>
-              <p>{{ viewCompanies.description }}</p>
-          </div> -->
-      <!-- Resto del contenido -->
+    <div class="col-md-8">
+      <h3>{{ directory.title?.rendered }}</h3>
+      @if(featuredMedia){
+      <div class="head">
+        <img
+          [src]="featuredMedia.source_url"
+          alt="Featured Image"
+          class="shadow-sm p-3 mb-5 bg-body rounded"
+        />
+      </div>
+      }
+      <div class="content row col-lg-12 mt-3">
+        @for(card of businessCards; track card.id){
+        <div class="business-card col-lg-6 col-md-6 shadow-lg p-2 mb-5 bg-body">
+          <h5>{{ card.name }}</h5>
+          <p>{{ card.title }}</p>
+          <ul>
+            @for(contact of card.contacts; track contact.id){
+            <li>
+              <i [class]="contact.iconClass"></i>
+              <span>{{ contact.text }}</span>
+            </li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
     </div>
+
     <div class="col-md-4">
       <app-links-staff [name]="name"></app-links-staff>
       <app-links-home></app-links-home>
       <h3>Enlaces Relacionados</h3>
       <ul>
-        <!-- <li *ngFor="let link of viewCompanies.relatedLinks">
-                  <a [href]="link.url">{{ link.name }}</a>
-              </li> -->
+        <!-- Lista de enlaces relacionados -->
       </ul>
     </div>
   </div>
 </div>
+}

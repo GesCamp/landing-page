@@ -5,6 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CompaniesComponent } from './pages/companies/companies/companies.component';
 import { DirectoryComponent } from './pages/companies/company/directory/directory.component';
 import { CompanyComponent } from './pages/companies/company/company.component';
+import { MachinesComponent } from './pages/companies/company/machines/machines.component';
+import { VolunteersComponent } from './pages/companies/company/volunteers/volunteers.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -21,14 +23,24 @@ export const routes: Routes = [
         component: CompaniesComponent,
       },
       {
-        path: 'directorio-general',
+        path: ':nombre-company',
+        component: CompanyComponent,
+        data: { title: 'Compañía' },
+      },
+      {
+        path: 'directory/:nombre-company',
         component: DirectoryComponent,
         data: { title: 'Directorio' },
       },
       {
-        path: ':nombre-company',
-        component: CompanyComponent,
-        data: { title: 'Compañía' },
+        path: 'machines/:nombre-company',
+        component: MachinesComponent,
+        data: { title: 'Machines' },
+      },
+      {
+        path: 'volunteers/:nombre-company',
+        component: VolunteersComponent,
+        data: { title: 'Machines' },
       },
     ],
   }, // Agrega

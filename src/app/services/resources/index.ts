@@ -1,2 +1,2 @@
-export * from './dtos';
+export * from './interfaces';
 export * from './get-media-resource.service';

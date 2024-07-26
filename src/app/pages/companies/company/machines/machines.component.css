@@ -1,0 +1,40 @@
+:host ::ng-deep .wp-block-image  { 
+    
+    img {
+    width: 100% !important;
+    height: auto;
+  }
+  }
+
+  .machine-card{
+    padding: 0.1px;
+    border-radius: 1rem;
+    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+    width: 100%; /* O el ancho que desees */
+    box-sizing: border-box;}
+
+  .machine-card .image-machine{
+    width: 100%!important;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .machine-card i{
+    color: #BF2A45;
+    margin-right: 8px;
+  }
+  .machine-card .card-title{
+    margin-top: 0;
+    font-weight: 900;
+    padding-left: 8px;
+    color: #022859
+  }
+  .machine-card .card-text{
+    text-align: justify;
+    width: 100%;
+    margin-top: 0;
+    font-weight: 900;
+    color: #223240;
+    object-fit: cover;
+    height: 85px;
+  }

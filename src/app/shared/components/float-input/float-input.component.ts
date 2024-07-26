@@ -5,7 +5,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-float-input',
   templateUrl: './float-input.component.html',
-  styleUrls: ['./float-input.component.scss'],
+  styleUrls: ['./float-input.component.css'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
 })

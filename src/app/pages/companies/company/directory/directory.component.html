@@ -1,23 +1,37 @@
-@if(company){
-<div class="container mt-5">
+@if(directory){
+<div class="container mt-5" *ngIf="directory">
   <div class="row">
     <div class="col-md-8">
-      <h2>{{ company.title.rendered }}</h2>
+      <h3>{{ directory.title?.rendered }}</h3>
+      @if(featuredMedia){
       <div class="head">
         <img
-          [src]="featuredMedia?.source_url"
+          [src]="featuredMedia.source_url"
           alt="Featured Image"
           class="shadow-sm p-3 mb-5 bg-body rounded"
         />
       </div>
-      <p class="text-muted">
-        Publicado por {{ company.author }} a las {{ company.date }}
-      </p>
-      <div class="content" [innerHTML]="company.content.rendered"></div>
+      }
+      <div class="content row col-lg-12 mt-3">
+        @for(card of businessCards; track card.id){
+        <div class="business-card col-lg-6 col-md-6 shadow-lg p-2 mb-5 bg-body">
+          <h5>{{ card.name }}</h5>
+          <p>{{ card.title }}</p>
+          <ul>
+            @for(contact of card.contacts; track contact.id){
+            <li>
+              <i [class]="contact.iconClass"></i>
+              <span>{{ contact.text }}</span>
+            </li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
     </div>
 
     <div class="col-md-4">
-      <app-links-staff></app-links-staff>
+      <app-links-staff [name]="name"></app-links-staff>
       <app-links-home></app-links-home>
       <h3>Enlaces Relacionados</h3>
       <ul>

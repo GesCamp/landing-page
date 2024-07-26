@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { GetMediaResourceDto } from './dtos';
+import { GetMediaResourceDto } from './interfaces';
 import { Injectable } from '@angular/core';
 
 @Injectable({

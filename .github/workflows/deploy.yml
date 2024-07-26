@@ -3,10 +3,10 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - master # o la rama desde la cual quieres desplegar
+      - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # usa la versión de Node.js que tu proyecto requiere
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
@@ -24,13 +24,12 @@ jobs:
       - name: Build Angular project
         run: npm run build -- --configuration production
 
-      - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@v0.6.0
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          args: --acl public-read --follow-symlinks --delete --exclude ".git/*" --exclude "README.md" --exclude "LICENSE"
-        env:
-          SOURCE_DIR: "./dist/landing-page-angular17"
-          S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: aws s3 sync ./dist/landing-page-angular17 s3://${{ secrets.AWS_S3_BUCKET }} --delete --acl public-read

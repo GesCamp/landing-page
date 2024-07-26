@@ -1,11 +1,7 @@
-:host ::ng-deep .wp-block-image  { 
-    
-    img {
-    width: 100% !important;
-    height: auto;
-  }
-  }
-
+.wp-block-image img {
+  width: 100% !important;
+  height: auto;
+}
 .head{
   width: 100%;
 }

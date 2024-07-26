@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { ViewCompanies } from '../../../shared/interfaces/viewCompanies';
 import { LinksStaffComponent } from '../../../shared/components/links-staff/links-staff.component';
 import { LinksHomeComponent } from '../../../shared/components/links-home/links-home.component';
-import { WordpressService } from '../../../services/api.service';
 import { CompanieService, CompaniesDto } from '../../../services/companies';
 import {
   GetMediaResourceDto,
@@ -15,7 +13,7 @@ import {
   standalone: true,
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss'],
+  styleUrls: ['./company.component.css'],
   imports: [
     RouterOutlet,
     CommonModule,

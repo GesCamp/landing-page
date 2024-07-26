@@ -1,9 +1,6 @@
-:host ::ng-deep .wp-block-image  { 
-    
-  img {
+.wp-block-image img {
   width: 100% !important;
   height: auto;
-}
 }
 
 .head{

@@ -2,6 +2,8 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
       - echo Installing dependencies...
       - npm install
@@ -11,6 +13,16 @@ phases:
       - echo Building the project...
       - npm run build
 
-artifacts:
-  files:
-    - "**/*"
+post_build:
+  commands:
+    - echo Extracting ZIP and deploying to S3...
+    # Empaqueta la aplicación Angular en un archivo ZIP
+    - zip -r cbmalalhueApp.zip ./dist/landing-page-angular17
+    # Sube el archivo ZIP a S3
+    - aws s3 cp cbmalalhueApp.zip s3://codepipeline-us-east-2-320386715850/cbmalalhueApp.zip
+    # Descarga el archivo ZIP desde S3
+    - aws s3 cp s3://codepipeline-us-east-2-320386715850/cbmalalhueApp.zip .
+    # Extrae el contenido del archivo ZIP
+    - unzip cbmalalhueApp.zip -d extracted
+    # Sincroniza el contenido extraído al bucket S3
+    - aws s3 sync extracted/ s3://cbmalalhue --acl public-read

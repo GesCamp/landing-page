@@ -7,22 +7,17 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install
-      - echo Installing zip and unzip...
 
   build:
     commands:
       - echo Building the project...
       - npm run build
 
-  post_build:
-    commands:
-      - echo Packaging the application...
-      - zip -r cbmalalhueApp.zip ./dist/landing-page-angular17
-      - echo Uploading ZIP to S3...
-      - aws s3 cp cbmalalhueApp.zip s3://codepipeline-us-east-2-320386715850/cbmalalhueApp.zip
-      - echo Downloading ZIP from S3...
-      - aws s3 cp s3://codepipeline-us-east-2-320386715850/cbmalalhueApp.zip .
-      - echo Extracting ZIP...
-      - unzip cbmalalhueApp.zip -d extracted
-      - echo Syncing to S3...
-      - aws s3 sync extracted/ s3://cbmalalhue --acl public-read
+post_build:
+  commands:
+    - echo Creating ZIP file and deploying to S3...
+    - zip -r cbmalalhueApp.zip ./dist/landing-page-angular17
+    - aws s3 cp cbmalalhueApp.zip s3://codepipeline-us-east-2-555005272417/cbmalalhueApp.zip
+    - aws s3 cp s3://codepipeline-us-east-2-555005272417/cbmalalhueApp.zip .
+    - unzip cbmalalhueApp.zip -d extracted
+    - aws s3 sync extracted/ s3://cbmalalhue.cl --acl public-read

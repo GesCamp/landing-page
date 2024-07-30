@@ -22,4 +22,4 @@ post_build:
     - unzip cbmalalhueApp.zip -d extracted
     - aws s3 sync extracted/ s3://cbmalalhue.cl --acl public-read
     - echo Syncing to S3...
-    - aws s3 sync ./dist/landing-page-angular17 s3://cbmalalhue.cl --acl public-read
+    - aws s3 sync ./dist/landing-page-angular17 s3://cbmalalhue.cl --acl public-read --region us-east-2

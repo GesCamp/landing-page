@@ -7,6 +7,9 @@ import { DirectoryComponent } from './pages/companies/company/directory/director
 import { CompanyComponent } from './pages/companies/company/company.component';
 import { MachinesComponent } from './pages/companies/company/machines/machines.component';
 import { VolunteersComponent } from './pages/companies/company/volunteers/volunteers.component';
+import { PostsComponent } from './pages/home/components/posts/posts.component';
+import { PostComponent } from './pages/home/components/post/post.component';
+import { PostResolver } from './pages/home/components/post/post.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -43,5 +46,17 @@ export const routes: Routes = [
         data: { title: 'Machines' },
       },
     ],
-  }, // Agrega
+  },
+  {
+    path: 'novedades',
+    component: PostsComponent,
+    data: { title: 'Novedades Bomberos Malalhue' },
+  },
+  {
+    path: 'noticia/:slug-noticia',
+    component: PostComponent,
+    resolve: {
+      post: PostResolver,
+    },
+  },
 ];

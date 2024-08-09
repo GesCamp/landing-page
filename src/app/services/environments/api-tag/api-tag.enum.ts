@@ -6,4 +6,5 @@ export const ApiTag = {
   DIRECTORY: 'directory',
   MACHINES: 'machines',
   VOLUNTEERS: 'volunteers',
+  CATEGORIES: 'categories',
 };

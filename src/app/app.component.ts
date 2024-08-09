@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DirectoryComponent } from './pages/companies/company/directory/directory.component';
 import { CompaniesComponent } from './pages/companies/companies/companies.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PostsComponent } from './pages/home/components/posts/posts.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
     DirectoryComponent,
     CompaniesComponent,
     HomeComponent,
+    PostsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

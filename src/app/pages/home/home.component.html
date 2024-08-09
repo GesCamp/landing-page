@@ -50,10 +50,7 @@
 <section class="separator-img">
   <div class="w-100 parallax-wrapper">
     <a href="https://www.bomberos.cl" target="_blank">
-      <img
-        src="https://www.cbmalalhue.cl/assets/banner_bomberos.jpg"
-        class="img-fluid w-100"
-      />
+      <img src="./assets/images/banner_bomberos.jpg" class="img-fluid w-100" />
     </a>
   </div>
 </section>
@@ -65,36 +62,7 @@
       </div>
     </div>
     @if(isLoading){
-    <div class="spinners">
-      <div
-        class="spinner-grow text-danger"
-        style="width: 3rem; height: 3rem"
-        role="status"
-      >
-        <span class="sr-only text-center">Loading...</span>
-      </div>
-      <div
-        class="spinner-grow text-warning"
-        style="width: 3rem; height: 3rem"
-        role="status"
-      >
-        <span class="sr-only text-center">Loading...</span>
-      </div>
-      <div
-        class="spinner-grow text-success"
-        style="width: 3rem; height: 3rem"
-        role="status"
-      >
-        <span class="sr-only text-center">Loading...</span>
-      </div>
-      <div
-        class="spinner-grow text-info"
-        style="width: 3rem; height: 3rem"
-        role="status"
-      >
-        <span class="sr-only text-center">Loading...</span>
-      </div>
-    </div>
+    <app-loading></app-loading>
     } @if(!isLoading){
     <div class="row">
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of posts">
@@ -139,6 +107,11 @@
       </div>
     </div>
     }
+    <div class="container col-12">
+      <a [routerLink]="['/novedades']" class="btn btn-outline-danger col-12"
+        >Ver más</a
+      >
+    </div>
   </div>
 </section>
 <section class="section-blog">

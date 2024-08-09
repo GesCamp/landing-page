@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { FloatInputComponent } from '../../shared/components/float-input/float-input.component';
 import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
 import { GetAllPostsService } from '../../services/post';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ import { GetAllPostsService } from '../../services/post';
     ReactiveFormsModule,
     FloatInputComponent,
     IndexCarouselComponent,
+    LoadingComponent,
   ],
   providers: [DatePipe],
   templateUrl: './home.component.html',
@@ -34,9 +36,10 @@ export class HomeComponent implements OnInit {
     { path: 'assets/images/3.jpg' },
   ];
   contactForm!: FormGroup;
+  currentPage: number = 1;
+  perPage: number = 9;
   constructor(
     private fb: FormBuilder,
-    private wordpressService: WordpressService,
     private datePipe: DatePipe,
     private readonly getPostsService: GetAllPostsService
   ) {
@@ -51,10 +54,13 @@ export class HomeComponent implements OnInit {
 
   posts: any[] = [];
   ngOnInit(): void {
-    this.getPostsService.getPosts().subscribe((posts) => {
-      this.posts = posts;
-      this.isLoading = false;
-    });
+    this.getPostsService
+      .getPosts(this.currentPage, this.perPage)
+      .subscribe(({ posts }) => {
+        this.posts = posts;
+
+        this.isLoading = false;
+      });
   }
 
   getFeaturedImage(post: any): string {

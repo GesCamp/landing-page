@@ -1,51 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WordpressService } from '../../../../services/api.service';
-import { CommonModule, DatePipe } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { GetPostService } from '../../../../services/post/get-post';
+import { DatePipe, CommonModule } from '@angular/common';
 import { LinksHomeComponent } from '../../../../shared/components/links-home/links-home.component';
-import { GetAllPostsService } from '../../../../services/post';
+import { RouterModule } from '@angular/router';
+import { GetCategoryService } from '../../../../services/resources/get-category.service';
+import {
+  GetMediaResourceDto,
+  GetMediaResourceService,
+} from '../../../../services/resources';
 
 @Component({
   selector: 'app-post',
   standalone: true,
+  providers: [DatePipe],
   imports: [CommonModule, RouterModule, LinksHomeComponent],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.css',
+  styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  posts$: Observable<any[]> | undefined;
+  slug!: string;
+  item: any;
+  categories: string[] = [];
+  featuredMedia: GetMediaResourceDto | null = null;
+
   constructor(
-    private postsService: GetAllPostsService,
-    private datePipe: DatePipe
+    private route: ActivatedRoute,
+    private getPostService: GetPostService,
+    private datePipe: DatePipe,
+    private categoryService: GetCategoryService,
+    private readonly getMediaResource: GetMediaResourceService
   ) {}
 
-  ngOnInit(): void {
-    this.posts$ = this.postsService.getPosts();
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.slug = params['slug-noticia'];
+      this.loadPost(this.slug);
+    });
   }
 
-  getFeaturedImage(post: any): string {
-    return post._embedded &&
-      post._embedded['wp:featuredmedia'] &&
-      post._embedded['wp:featuredmedia'][0]
-      ? post._embedded['wp:featuredmedia'][0].source_url
-      : '';
+  loadPost(slug: string) {
+    this.getPostService.getPostBySlug(slug).subscribe((item: any) => {
+      this.item = item;
+      this.loadCategories(item.categories);
+    });
   }
 
-  getCategories(post: any): string[] {
-    return post._embedded &&
-      post._embedded['wp:term'] &&
-      post._embedded['wp:term'][0]
-      ? post._embedded['wp:term'][0].map((term: any) => term.name)
-      : [];
+  loadCategories(categoryIds: number[]) {
+    if (categoryIds.length > 0) {
+      this.categoryService
+        .getCategoriesByIds(categoryIds)
+        .subscribe((categories: any[]) => {
+          this.categories = categories.map((cat) => cat.name);
+        });
+    }
   }
 
   formatDate(date: string): string {
     const formattedDate = this.datePipe.transform(date, 'dd/MM/yyyy');
     return formattedDate ? formattedDate : 'Fecha no disponible';
-  }
-
-  truncateText(text: string, limit: number): string {
-    return text.length > limit ? text.substring(0, limit) + '...' : text;
   }
 }

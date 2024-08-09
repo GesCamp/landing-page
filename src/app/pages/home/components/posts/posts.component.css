@@ -1,0 +1,41 @@
+.badge-category{
+    color: #FFF;
+}
+.title-post{
+    font-size: 2rem;
+    margin-top: 0;
+    line-height: 1; /* Ajusta según sea necesario */
+
+}
+.text-muted{
+    margin: 0;
+}
+.text-post{
+    margin-top: -1.5rem;
+}
+
+.card-post{
+    margin: 4px;
+    max-width: 267px;
+    padding: 0px;
+    border-radius: .5rem;
+    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+    width: 100%; /* O el ancho que desees */
+    box-sizing: border-box;
+    flex-direction: column;
+    height: 100%;
+}
+.container-card{
+    margin: auto;
+    padding: auto;
+    min-width:100%!important;
+}
+.card-post .btn{
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .card-post {
+        max-width: 100%;
+    }
+  }

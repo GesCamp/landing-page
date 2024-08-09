@@ -6,8 +6,8 @@
   .machine-card{
     padding: 0.1px;
     border-radius: 1rem;
-    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
-    width: 100%; /* O el ancho que desees */
+    overflow: hidden;
+    width: 100%;
     box-sizing: border-box;}
 
   .machine-card .image-machine{

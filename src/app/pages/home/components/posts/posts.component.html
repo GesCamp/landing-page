@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <h2>Novedades</h2>
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <div class="row container-card col-12 p-0">
+        @if(isLoading){
+        <div class="container">
+          <app-loading></app-loading>
+        </div>
+        } @if(!isLoading){ @for (post of posts ; track post.id) {
+        <div
+          class="card-post col-lg-4 col-md-12 border overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative bg-light"
+        >
+          <div
+            class="col-12 d-flex align-items-center justify-content-center p-0"
+            style="max-height: 200px; overflow: hidden"
+          >
+            <img
+              [src]="getFeaturedImage(post)"
+              alt="Post Image"
+              class="img-fluid rounded image-post"
+              style="max-width: 105%; height: auto; object-fit: cover"
+            />
+          </div>
+          <div class="col-12">
+            <span
+              *ngFor="let category of getCategories(post)"
+              class="badge bg-danger mx-1 badge-category"
+              >{{ category }}</span
+            >
+          </div>
+          <div class="col-12 d-flex flex-column position-static mb-2">
+            <h3 class="title-post">
+              {{ truncateText(post.title.rendered, 30) }}
+            </h3>
+            <div class="text-muted">{{ formatDate(post.date) }}</div>
+            <p
+              class="text-post"
+              [innerHTML]="truncateText(post.excerpt.rendered, 150)"
+            ></p>
+            <a
+              [routerLink]="['/noticia/', post.slug]"
+              class="btn btn-outline-danger mt-auto"
+              >Continuar leyendo</a
+            >
+          </div>
+        </div>
+        } }
+      </div>
+      @if(!isLoading){
+      <div class="pagination justify-content-center">
+        <button
+          class="page-link"
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+        <span>Página {{ currentPage }}</span>
+        <button class="page-link" (click)="nextPage()">Siguiente</button>
+      </div>
+      }
+    </div>
+
+    <div class="col-lg-3 col-md-12">
+      <app-links-home></app-links-home>
+    </div>
+  </div>
+</div>

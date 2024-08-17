@@ -1,0 +1,74 @@
+<!-- Existing code -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      @if(isLoading){
+      <app-loading></app-loading>
+      }@else {
+      <h3>{{ gallery?.title }}</h3>
+      <div class="details">
+        <div class="sub-detail">
+          <p>
+            Publicado el:
+            <span>{{ gallery?.publication_date }}</span>
+          </p>
+        </div>
+        <div class="sub-detail">
+          <p>
+            Esta galería contiene:
+            <span>{{ gallery?.total_images }}</span>
+            imágenes.
+          </p>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-40 mt-3">
+        @if(gallery?.images){ @for(image of gallery?.images; track image.id){
+        <div class="col">
+          <div
+            class="image-card shadow-lg mb-5 bg-body"
+            (click)="openModal(image.url, image.title)"
+          >
+            <img
+              [src]="image.url"
+              class="card-img-top image-machine"
+              alt="image.alt"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ image.title }}
+              </h5>
+            </div>
+          </div>
+        </div>
+        }}
+      </div>
+      <div class="pagination">
+        <button
+          type="button"
+          class="btn btn-outline-warning page-link"
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button
+          type="button"
+          class="btn btn-outline-warning page-link"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          Siguiente
+        </button>
+      </div>
+      }
+    </div>
+    <div class="col-md-4">
+      <app-links-home></app-links-home>
+      <h3>Enlaces Relacionados</h3>
+      <ul>
+        <!-- Lista de enlaces relacionados -->
+      </ul>
+    </div>
+  </div>
+</div>

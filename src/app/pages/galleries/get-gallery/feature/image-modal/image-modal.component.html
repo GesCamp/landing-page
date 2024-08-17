@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ imageTitle }}
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="closeModal()"
+  ></button>
+</div>
+<div class="modal-body text-center" (click)="closeModal()">
+  <img
+    [src]="imageUrl"
+    class="img-fluid"
+    alt="Imagen de galería"
+    (click)="$event.stopPropagation()"
+  />
+</div>

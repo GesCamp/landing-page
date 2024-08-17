@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="galleries">
+        <h2>Galerías</h2>
+        <p>Compartimos nuestra galería de imagenes</p>
+        <div class="col-md-12">
+          <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            @for (gallery of galleries; track gallery.id) {
+            <a [routerLink]="['/galerias', gallery.slug]">
+              <div class="gallery-card shadow-lg mb-5 bg-body">
+                <img
+                  [src]="gallery.random_image.url"
+                  class="card-img-top image-gallery"
+                  alt="{{ gallery.random_image.alt }}"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <i class="fas fa-image" aria-hidden="true"></i
+                    >{{ gallery.title }}
+                  </h5>
+                  <span class="span-date">{{ gallery.publication_date }}</span>
+                </div>
+              </div>
+            </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <button
+          type="button"
+          class="btn btn-outline-warning page-link"
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button
+          type="button"
+          class="btn btn-outline-warning page-link"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <app-links-home></app-links-home>
+    </div>
+  </div>
+</div>

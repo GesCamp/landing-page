@@ -10,6 +10,9 @@ import { VolunteersComponent } from './pages/companies/company/volunteers/volunt
 import { PostsComponent } from './pages/home/components/posts/posts.component';
 import { PostComponent } from './pages/home/components/post/post.component';
 import { PostResolver } from './pages/home/components/post/post.resolver';
+import { GetAllGalleriesComponent } from './pages/galleries/get-all-galleries/get-all-galleries.component';
+import { GetGalleryComponent } from './pages/galleries/get-gallery/get-gallery.component';
+import { GetGalleryResolver } from './pages/galleries/get-gallery/get-gallery.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -58,5 +61,21 @@ export const routes: Routes = [
     resolve: {
       post: PostResolver,
     },
+  },
+  {
+    path: 'galerias',
+    children: [
+      {
+        path: '',
+        component: GetAllGalleriesComponent,
+      },
+      {
+        path: ':slug-galery',
+        component: GetGalleryComponent,
+        resolve: {
+          gallery: GetGalleryResolver,
+        },
+      },
+    ],
   },
 ];

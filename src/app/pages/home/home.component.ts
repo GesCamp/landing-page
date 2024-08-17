@@ -12,6 +12,7 @@ import { FloatInputComponent } from '../../shared/components/float-input/float-i
 import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
 import { GetAllPostsService } from '../../services/post';
 import { LoadingComponent } from './components/loading/loading.component';
+import { GetGalleriesComponent } from './components/galleries/get-galleries/get-galleries.component';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     FloatInputComponent,
     IndexCarouselComponent,
     LoadingComponent,
+    GetGalleriesComponent,
   ],
   providers: [DatePipe],
   templateUrl: './home.component.html',

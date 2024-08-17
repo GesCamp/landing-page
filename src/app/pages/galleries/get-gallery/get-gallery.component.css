@@ -1,0 +1,34 @@
+
+h3{
+  text-align: center;
+}
+.details{
+  display: flex;
+  justify-content: space-between;
+}
+p{
+  color: #022859;
+
+}
+p span{
+  color: #023e73ca;
+}
+.card-body{
+  padding: 0;
+  background-color: #023e73ca;
+}
+.card-body .card-title{
+  color: #FFFF;
+  max-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: .8rem;
+  line-height: 1.2; /* Ajusta este valor según sea necesario */
+  border-radius: 10px;
+}
+
+.pagination{
+    width: 100%;
+    justify-content: center;
+  }

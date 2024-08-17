@@ -1,0 +1,42 @@
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  flex-wrap: wrap;
+}
+
+.modal-header .modal-title {
+  color: #A60A27;
+  max-width: 100%;
+  height: auto;
+  margin-right: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  white-space: normal; 
+  word-wrap: break-word; 
+  font-size: 1rem;
+}
+
+.modal-body img {
+  width: 100%;
+  height: auto;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.modal {
+  display: block !important;
+  z-index: 1050; 
+}
+
+
+.modal-backdrop {
+  z-index: 1040;
+}

@@ -7,4 +7,5 @@ export const ApiTag = {
   MACHINES: 'machines',
   VOLUNTEERS: 'volunteers',
   CATEGORIES: 'categories',
+  GALLERIES: 'galleries',
 };

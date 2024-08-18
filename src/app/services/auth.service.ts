@@ -13,13 +13,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   authenticate(): Observable<any> {
-    const body = { username: 'admin', password: 'adminBomberos2024' };
+    const body = { username: 'user', password: 'CbMalalhue_2024!' };
     return this.http.post<any>(environments.authUrl, body).pipe(
       tap((response) => {
-        this.token = response.token;
-        if (this.token) {
-          localStorage.setItem('authToken', this.token);
+        const token = response?.data?.token ?? null; // Asignar null si no existe el token
+        if (token) {
+          this.token = token;
+          localStorage.setItem('authToken', this.token ?? ''); // Asegúrate de que `this.token` no sea `null`
         } else {
+          console.warn('No se encontró un token en la respuesta');
           localStorage.removeItem('authToken');
         }
       }),
@@ -27,8 +29,13 @@ export class AuthService {
     );
   }
 
-  getToken(): string | null {
-    return this.token || localStorage.getItem('authToken');
+  async getToken(): Promise<string> {
+    const token = this.token || localStorage.getItem('authToken');
+    if (token) {
+      return token;
+    } else {
+      throw new Error('Token no encontrado');
+    }
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

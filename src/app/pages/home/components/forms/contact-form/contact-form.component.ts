@@ -68,6 +68,7 @@ export class ContactFormComponent {
           this.responseData = response;
           this.submissionStatus = 'Form submitted successfully!';
           this.contactForm.reset();
+          this.contactForm.get('celular')?.setValue('+56'); // Reiniciar con el prefijo
         },
         (error) => {
           console.error('Error submitting form', error);
@@ -83,8 +84,11 @@ export class ContactFormComponent {
   enforcePrefix() {
     const celularControl = this.contactForm.get('celular');
     celularControl?.valueChanges.subscribe((value) => {
+      // Si el usuario selecciona todo y escribe, se mantiene el prefijo
       if (!value.startsWith('+56')) {
-        celularControl.setValue('+56', { emitEvent: false });
+        celularControl.setValue('+56' + value.replace(/^\+56/, ''), {
+          emitEvent: false,
+        });
       }
     });
   }

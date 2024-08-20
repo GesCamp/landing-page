@@ -33,10 +33,10 @@
             >
             </app-float-input>
             <app-float-input
-              [type]="'tel'"
+              [type]="'text'"
               [title]="'Celular'"
               [control]="contactForm.get('celular')"
-              [requiredText]="'Ingrese formato correcto del nº'"
+              [requiredText]="'Ingrese formato correcto +56987654321'"
               maxlength="9"
               (keydown)="preventPrefixDeletion($event)"
             >

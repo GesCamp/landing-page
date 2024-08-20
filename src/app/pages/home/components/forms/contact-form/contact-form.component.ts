@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FloatInputComponent } from '../../../../../shared/components/float-input/float-input.component';
 import {
   FormBuilder,
@@ -20,11 +20,12 @@ export class ContactFormComponent {
   contactForm!: FormGroup;
   responseData: any;
   submissionStatus: string = '';
+  private formsService = inject(FormsService);
 
   // form id
   formId = 123;
 
-  constructor(private fb: FormBuilder, private formsService: FormsService) {
+  constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
       nombres: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

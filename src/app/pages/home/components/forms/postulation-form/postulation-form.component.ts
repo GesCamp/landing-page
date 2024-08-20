@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,10 +19,11 @@ export class PostulationFormComponent {
   infoForm: FormGroup;
   responseData: any;
   submissionStatus: string = '';
+  private formsService = inject(FormsService);
 
   formId = 94;
 
-  constructor(private fb: FormBuilder, private formsService: FormsService) {
+  constructor(private fb: FormBuilder) {
     this.infoForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],

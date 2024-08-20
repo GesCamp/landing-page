@@ -6,14 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FloatInputComponent } from '../../shared/components/float-input/float-input.component';
 import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
 import { GetAllPostsService } from '../../services/post';
 import { LoadingComponent } from './components/loading/loading.component';
 import { GetGalleriesComponent } from './components/galleries/get-galleries/get-galleries.component';
-import { PostulationFormComponent } from './components/forms/postulation-form/postulation-form.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
+import { PostulationFormComponent } from './components/forms/postulation-form/postulation-form.component';
 
 @Component({
   selector: 'app-home',
@@ -26,8 +26,8 @@ import { ContactFormComponent } from './components/forms/contact-form/contact-fo
     IndexCarouselComponent,
     LoadingComponent,
     GetGalleriesComponent,
-    PostulationFormComponent,
     ContactFormComponent,
+    PostulationFormComponent,
   ],
   providers: [DatePipe],
   templateUrl: './home.component.html',
@@ -43,13 +43,25 @@ export class HomeComponent implements OnInit {
   contactForm!: FormGroup;
   currentPage: number = 1;
   perPage: number = 9;
+
   constructor(
     private datePipe: DatePipe,
-    private readonly getPostsService: GetAllPostsService
+    private readonly getPostsService: GetAllPostsService,
+    private route: ActivatedRoute, // Inyecta ActivatedRoute
+    private router: Router // Inyecta Router
   ) {}
 
   posts: any[] = [];
   ngOnInit(): void {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment) {
+        const element = document.getElementById(fragment);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave
+        }
+      }
+    });
+
     this.isLoading = true; // Asegúrate de que esté en true al comenzar
 
     this.getPostsService.getPosts(this.currentPage, this.perPage).subscribe(

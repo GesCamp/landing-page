@@ -8,4 +8,5 @@ export const ApiTag = {
   VOLUNTEERS: 'volunteers',
   CATEGORIES: 'categories',
   GALLERIES: 'galleries',
+  CONTACT_FORMS: 'contact-forms',
 };

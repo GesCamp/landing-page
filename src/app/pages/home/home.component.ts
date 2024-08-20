@@ -6,13 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { WordpressService } from '../../services/api.service';
 import { RouterModule } from '@angular/router';
 import { FloatInputComponent } from '../../shared/components/float-input/float-input.component';
 import { IndexCarouselComponent } from '../../shared/components/index-carousel/index-carousel.component';
 import { GetAllPostsService } from '../../services/post';
 import { LoadingComponent } from './components/loading/loading.component';
 import { GetGalleriesComponent } from './components/galleries/get-galleries/get-galleries.component';
+import { PostulationFormComponent } from './components/forms/postulation-form/postulation-form.component';
+import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,8 @@ import { GetGalleriesComponent } from './components/galleries/get-galleries/get-
     IndexCarouselComponent,
     LoadingComponent,
     GetGalleriesComponent,
+    PostulationFormComponent,
+    ContactFormComponent,
   ],
   providers: [DatePipe],
   templateUrl: './home.component.html',
@@ -41,28 +44,24 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   perPage: number = 9;
   constructor(
-    private fb: FormBuilder,
     private datePipe: DatePipe,
     private readonly getPostsService: GetAllPostsService
-  ) {
-    this.contactForm = this.fb.group({
-      nombres: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      asunto: ['', Validators.required],
-      celular: ['', Validators.required],
-      mensaje: ['', Validators.required],
-    });
-  }
+  ) {}
 
   posts: any[] = [];
   ngOnInit(): void {
-    this.getPostsService
-      .getPosts(this.currentPage, this.perPage)
-      .subscribe(({ posts }) => {
-        this.posts = posts;
+    this.isLoading = true; // Asegúrate de que esté en true al comenzar
 
-        this.isLoading = false;
-      });
+    this.getPostsService.getPosts(this.currentPage, this.perPage).subscribe(
+      ({ posts }) => {
+        this.posts = posts;
+        this.isLoading = false; // Cambia a false cuando los datos estén listos
+      },
+      (error) => {
+        console.error('Error fetching posts:', error);
+        this.isLoading = false; // Cambia a false en caso de error también
+      }
+    );
   }
 
   getFeaturedImage(post: any): string {

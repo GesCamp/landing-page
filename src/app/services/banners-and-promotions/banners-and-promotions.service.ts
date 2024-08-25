@@ -10,8 +10,8 @@ import { ApiTag } from '../environments/api-tag/api-tag.enum';
 export class BannersAndPromotionsService {
   constructor(private http: HttpClient) {}
 
-  async getBannersAndPromotions(id: number): Promise<any> {
-    return await this.http.get(
+  async getBannersAndPromotions(id: number): Promise<Observable<any>> {
+    return this.http.get(
       `${environments.baseBomberosMalalhueUrl}${ApiTag.BANNERS_AND_PROMOTIONS}-${id}`
     );
   }

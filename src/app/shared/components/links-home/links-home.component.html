@@ -1,28 +1,20 @@
-<div class="container mt-2 col-12">
-  <form class="row d-flex min-width-100">
-    <input
-      class="form-control me-2 w-100"
-      type="search"
-      placeholder="Buscar"
-      aria-label="Buscar"
-    />
-    <!-- <button class="btn btn-outline-success" type="submit">Buscar</button> -->
-  </form>
-</div>
+<div class="container mt-2 col-12"><h4>Te puede interesar</h4></div>
 <div class="container mt-2">
   <div class="row">
     <div class="col">
       <div class="d-flex justify-content-center align-items-center">
-        <a
-          class="text-center"
-          href="https://lanco.cl/2023/08/10/alcalde-rocha-presento-oficialmente-imagen-corporativa-de-los-80-anos-de-malalhue/"
-        >
-          <img
-            src="https://lanco.cl/wp-content/uploads/2023/08/logo-80-anos-malalhue-768x680.png"
-            alt="Imagen"
-            class="w-75 justify-content-center"
-          />
-        </a>
+        @if(imagesWithLinks1){
+        <igx-carousel [loop]="true" [interval]="5000"
+          >@for(item of imagesWithLinks1; track item.id){
+          <igx-slide>
+            <a href="{{ item.link }}" target="_blank">
+              <img [src]="item.src" alt="{{ item.alt }}" /></a
+          ></igx-slide>
+          }
+        </igx-carousel>
+        } @else {
+        <h1>Espacio disponible para publicidad</h1>
+        }
       </div>
     </div>
   </div>
@@ -31,13 +23,18 @@
   <div class="row">
     <div class="col">
       <div class="d-flex justify-content-center align-items-center">
-        <a href="">
-          <img
-            src="https://lanco.cl/wp-content/uploads/2023/07/picasion.com_3a331f33bc556b9fb0657f123daccf2e.gif"
-            alt="Imagen"
-            class="img-fluid w-100"
-          />
-        </a>
+        @if(imagesWithLinks2){
+        <igx-carousel [loop]="true" [interval]="5000" direction="prev"
+          >@for(item of imagesWithLinks2; track item.id){
+          <igx-slide>
+            <a href="{{ item.link }}" target="_blank">
+              <img [src]="item.src" alt="{{ item.alt }}" /></a
+          ></igx-slide>
+          }
+        </igx-carousel>
+        } @else {
+        <h1>Espacio disponible para publicidad</h1>
+        }
       </div>
     </div>
   </div>
@@ -46,13 +43,18 @@
   <div class="row">
     <div class="col">
       <div class="d-flex justify-content-center align-items-center">
-        <a href="">
-          <img
-            src="https://lanco.cl/wp-content/uploads/2023/08/365817908_761519362644587_3193659284735896204_n-300x300.jpg"
-            alt="Imagen"
-            class="img-fluid w-100"
-          />
-        </a>
+        @if(imagesWithLinks3){
+        <igx-carousel class="custom-carousel" [loop]="true" [interval]="5000"
+          >@for(item of imagesWithLinks3; track item.id){
+          <igx-slide>
+            <a href="{{ item.link }}" target="_blank">
+              <img [src]="item.src" alt="{{ item.alt }}" /></a
+          ></igx-slide>
+          }
+        </igx-carousel>
+        } @else {
+        <h1>Espacio disponible para publicidad</h1>
+        }
       </div>
     </div>
   </div>
@@ -99,7 +101,7 @@
       <div class="row g-0 mt-1">
         <div class="col-md-4 h-50 py-1 px-1">
           <img
-            src="https://www.devom.cl/public/img/hero/logo_devom_1.png"
+            src="http://portal.cbmalalhue.cl/wp-content/uploads/2024/08/Logo-de-Moda-con-Iniciales-Caligrafico-Elegante-Rosa-y-Negro.png"
             alt="Imagen"
             class="img-fluid mt-2 h-75"
           />

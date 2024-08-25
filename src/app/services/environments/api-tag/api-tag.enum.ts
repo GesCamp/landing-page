@@ -9,4 +9,5 @@ export const ApiTag = {
   CATEGORIES: 'categories',
   GALLERIES: 'galleries',
   CONTACT_FORMS: 'contact-forms',
+  BANNERS_AND_PROMOTIONS: 'pages/?slug=banner-y-promociones',
 };

@@ -81,8 +81,8 @@
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .tarjeta-contacto {
-      margin-top: 20px;
+  .contact-tarjet h4 {
+      font-size: 1.5rem;
       /* ... otros estilos ... */
   }
 }

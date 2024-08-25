@@ -132,7 +132,7 @@
               Cuerpo de Bomberos Malalhue
             </h5>
             <a
-              href="./companies/directorio-general"
+              [routerLink]="['/companies', 'directorio-general']"
               class="btn btn-warning regular-button"
               >Directorio</a
             >
@@ -148,7 +148,9 @@
           />
           <div class="card-body">
             <h5 class="card-title">Primera</h5>
-            <a href="./companies/primera" class="btn btn-primary">Conoce más</a>
+            <a [routerLink]="['/companies', 'primera']" class="btn btn-primary"
+              >Conoce más</a
+            >
           </div>
         </div>
       </div>
@@ -161,7 +163,9 @@
           />
           <div class="card-body">
             <h5 class="card-title">Segunda</h5>
-            <a href="./companies/segunda" class="btn btn-primary">Conoce más</a>
+            <a [routerLink]="['/companies', 'segunda']" class="btn btn-primary"
+              >Conoce más</a
+            >
           </div>
         </div>
       </div>
@@ -174,7 +178,9 @@
           />
           <div class="card-body">
             <h5 class="card-title">Tercera</h5>
-            <a href="./companies/tercera" class="btn btn-primary">Conoce más</a>
+            <a [routerLink]="['/companies', 'tercera']" class="btn btn-primary"
+              >Conoce más</a
+            >
           </div>
         </div>
       </div>

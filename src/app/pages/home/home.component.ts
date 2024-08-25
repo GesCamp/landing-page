@@ -35,11 +35,11 @@ import { PostulationFormComponent } from './components/forms/postulation-form/po
 })
 export class HomeComponent implements OnInit {
   isLoading: boolean = true;
-  images = [
-    { path: 'assets/images/1.jpg' },
-    { path: 'assets/images/2.jpg' },
-    { path: 'assets/images/3.jpg' },
-  ];
+  // images = [
+  //   { path: 'assets/images/1.jpg' },
+  //   { path: 'assets/images/2.jpg' },
+  //   { path: 'assets/images/3.jpg' },
+  // ];
   contactForm!: FormGroup;
   currentPage: number = 1;
   perPage: number = 9;
@@ -47,8 +47,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private datePipe: DatePipe,
     private readonly getPostsService: GetAllPostsService,
-    private route: ActivatedRoute, // Inyecta ActivatedRoute
-    private router: Router // Inyecta Router
+    private route: ActivatedRoute // Inyecta ActivatedRoute
   ) {}
 
   posts: any[] = [];

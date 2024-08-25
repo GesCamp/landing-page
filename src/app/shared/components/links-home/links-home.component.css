@@ -1,0 +1,52 @@
+::ng-deep 
+  /* Configura el tamaño del carrusel */
+  .igx-carousel {
+    padding-top: .3rem;
+    width: 100%;
+    max-width: 100%;
+    height: 25rem;
+  }
+::ng-deep
+  /* Configura el tamaño de los slides del carrusel */
+  .igx-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada 1:1 */
+    width: 100%;
+    height: auto;
+  }
+::ng-deep
+  /* Configura el tamaño y estilo de las imágenes */
+  .igx-slide img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada 1:1 */
+    object-fit: cover; /* Asegura que la imagen cubra todo el contenedor */
+border-radius: .5rem;
+    object-fit: cover;
+    object-position: center;
+  transition: box-shadow 0.3s ease-in-out; /* Transición suave para el hover */
+  }
+
+
+::ng-deep igx-carousel .igx-carousel__arrow--prev,
+::ng-deep igx-carousel .igx-carousel__arrow--next {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border-radius: 50% !important;
+}
+
+::ng-deep igx-carousel .igx-carousel__arrow--prev .igx-nav-arrow,
+::ng-deep igx-carousel .igx-carousel__arrow--next .igx-nav-arrow {
+  color: rgba(255, 0, 0, 0.5) !important;
+  background-color: rgba(117, 117, 117, 0.316);
+}
+
+::ng-deep igx-carousel .igx-carousel__arrow--prev,
+::ng-deep igx-carousel .igx-carousel__arrow--next {
+  width: 30px !important;
+  height: 30px !important;
+}
+::ng-deep igx-carousel .igx-carousel__arrow--next{
+  margin-right: 2rem;
+}

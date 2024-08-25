@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
+import { PrincipalCarouselService } from '../../../services/principal-carousel';
 @Component({
   selector: 'app-index-carousel',
   standalone: true,
@@ -8,28 +9,55 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
   templateUrl: './index-carousel.component.html',
   styleUrl: './index-carousel.component.css',
 })
-export class IndexCarouselComponent {
-  images = [
-    { path: 'assets/images/1.jpg' },
-    { path: 'assets/images/2.jpg' },
-    { path: 'assets/images/3.jpg' },
-  ];
+export class IndexCarouselComponent implements OnInit {
+  principalCarousel: any[] = [];
+  imagesWithLinks: { src: string; id: number; link: string; alt: string }[] =
+    [];
+  currentImageIndex: number = 0;
 
-  getCaptionTitle(index: number): string {
-    const titles = [
-      'Incendio de Futa',
-      'Ceremonia Bomberos',
-      'Bomberos en acción',
-    ];
-    return titles[index] || '';
+  constructor(
+    private readonly getPrincipalCarousel: PrincipalCarouselService
+  ) {}
+
+  ngOnInit() {
+    this.loadPrincipalCarousel();
   }
 
-  getCaptionDescription(index: number): string {
-    const descriptions = [
-      'Bomberos de Malalhue, trabajando en Incendio de Forestal.',
-      'Bomberos participando en actividades junto a la comunidad',
-      'Bomberos participando de capcitaciones en Campus de Entrenamiento',
-    ];
-    return descriptions[index] || '';
+  async loadPrincipalCarousel(): Promise<void> {
+    const id = 'principal';
+    (await this.getPrincipalCarousel.getPrincipalBanner(id)).subscribe(
+      (data) => {
+        this.extractImagesAndLinks(data);
+      },
+      (error) => {
+        console.error('Ocurrió un error al obtener los datos:', error);
+      }
+    );
+  }
+  extractImagesAndLinks(data: any): void {
+    this.imagesWithLinks = [];
+
+    data.forEach((item1: any) => {
+      if (item1.content && item1.content.rendered) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(item1.content.rendered, 'text/html');
+
+        doc.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
+          const href = a.getAttribute('href');
+          a.querySelectorAll('img').forEach((img: HTMLImageElement) => {
+            const src = img.getAttribute('src');
+            const alt = img.getAttribute('alt') || 'Imagen sin descripción';
+            if (src && href) {
+              this.imagesWithLinks.push({
+                src,
+                link: href,
+                alt,
+                id: 0,
+              });
+            }
+          });
+        });
+      }
+    });
   }
 }

@@ -16,27 +16,25 @@
             style="max-height: 200px; overflow: hidden"
           >
             <img
-              [src]="getFeaturedImage(post)"
+              [src]="post.imageUrl"
               alt="Post Image"
               class="img-fluid rounded image-post"
               style="max-width: 105%; height: auto; object-fit: cover"
             />
           </div>
           <div class="col-12">
-            <span
-              *ngFor="let category of getCategories(post)"
-              class="badge bg-danger mx-1 badge-category"
-              >{{ category }}</span
-            >
+            <span class="badge bg-danger mx-1 badge-category">{{
+              post.category
+            }}</span>
           </div>
           <div class="col-12 d-flex flex-column position-static mb-2">
             <h3 class="title-post">
-              {{ truncateText(post.title.rendered, 30) }}
+              {{ truncateText(post.title, 30) }}
             </h3>
             <div class="text-muted">{{ formatDate(post.date) }}</div>
             <p
               class="text-post"
-              [innerHTML]="truncateText(post.excerpt.rendered, 150)"
+              [innerHTML]="truncateText(post.excerpt, 150)"
             ></p>
             <a
               [routerLink]="['/noticia/', post.slug]"

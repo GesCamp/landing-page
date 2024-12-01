@@ -14,6 +14,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { GetGalleriesComponent } from './components/galleries/get-galleries/get-galleries.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 import { PostulationFormComponent } from './components/forms/postulation-form/postulation-form.component';
+import { GetAllPostsDto } from '../../services/post/get-all-posts/dtos';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -47,48 +49,38 @@ export class HomeComponent implements OnInit {
   constructor(
     private datePipe: DatePipe,
     private readonly getPostsService: GetAllPostsService,
-    private route: ActivatedRoute // Inyecta ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
-  posts: any[] = [];
+  posts: GetAllPostsDto[] = [];
   ngOnInit(): void {
     this.route.fragment.subscribe((fragment) => {
       if (fragment) {
         const element = document.getElementById(fragment);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave
+          element.scrollIntoView({ behavior: 'smooth' });
         }
       }
     });
 
-    this.isLoading = true; // Asegúrate de que esté en true al comenzar
+    this.isLoading = true;
 
-    this.getPostsService.getPosts(this.currentPage, this.perPage).subscribe(
-      ({ posts }) => {
-        this.posts = posts;
-        this.isLoading = false; // Cambia a false cuando los datos estén listos
-      },
-      (error) => {
-        console.error('Error fetching posts:', error);
-        this.isLoading = false; // Cambia a false en caso de error también
-      }
-    );
-  }
-
-  getFeaturedImage(post: any): string {
-    return post._embedded &&
-      post._embedded['wp:featuredmedia'] &&
-      post._embedded['wp:featuredmedia'][0]
-      ? post._embedded['wp:featuredmedia'][0].source_url
-      : '';
-  }
-
-  getCategories(post: any): string[] {
-    return post._embedded &&
-      post._embedded['wp:term'] &&
-      post._embedded['wp:term'][0]
-      ? post._embedded['wp:term'][0].map((term: any) => term.name)
-      : [];
+    this.getPostsService
+      .getPosts(this.currentPage, this.perPage)
+      .pipe(
+        tap({
+          next: ({ posts }) => {
+            console.log(posts);
+            this.posts = posts;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            console.error('Error fetching posts:', error);
+            this.isLoading = false;
+          },
+        })
+      )
+      .subscribe();
   }
 
   formatData(date: string): string {
@@ -111,7 +103,7 @@ export class HomeComponent implements OnInit {
 
   parallax() {
     const scrollPosition = window.scrollY;
-    const parallaxOffset = scrollPosition * 0.2; // Puedes ajustar este valor para cambiar la velocidad del efecto parallax
+    const parallaxOffset = scrollPosition * 0.2;
     const images = document.getElementsByClassName(
       'parallax-img'
     ) as HTMLCollectionOf<HTMLElement>;

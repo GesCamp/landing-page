@@ -33,6 +33,12 @@
 .card-post .btn{
     margin-top: auto;
 }
+.pagination{
+    justify-content: center;
+    span{
+        padding: .4rem 1rem;
+    }
+}
 
 @media (max-width: 768px) {
     .card-post {

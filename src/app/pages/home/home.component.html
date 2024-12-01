@@ -66,38 +66,32 @@
     <app-loading></app-loading>
     } @if(posts){
     <div class="row">
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of posts">
+      @for(item of posts; track item.id){
+
+      <div class="col-12 col-md-6 col-lg-4">
         <div
           class="row m-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative bg-light"
         >
           <div
             class="col-12 d-flex align-items-center justify-content-center p-0"
             style="max-height: 230px; overflow: hidden"
-            *ngIf="getFeaturedImage(item)"
           >
             <img
-              [src]="getFeaturedImage(item)"
+              [src]="item.imageUrl"
               alt="Post Image"
               class="img-fluid rounded"
               style="max-width: 100%; max-height: auto; object-fit: cover"
             />
           </div>
           <div class="col-12 py-2">
-            <span
-              *ngFor="let category of getCategories(item)"
-              class="badge bg-danger mx-1"
-              >{{ category }}</span
-            >
+            <span class="badge bg-danger mx-1">{{ item.category }}</span>
           </div>
           <div class="col-12 d-flex flex-column position-static mb-2">
             <h3 class="mb-1">
-              {{ truncateText(item.title.rendered, 50) }}
+              {{ truncateText(item.title, 50) }}
             </h3>
             <div class="mb-1 text-muted">{{ formatData(item.date) }}</div>
-            <p
-              class="mb-2"
-              [innerHTML]="truncateText(item.excerpt.rendered, 200)"
-            ></p>
+            <p class="mb-2" [innerHTML]="truncateText(item.excerpt, 90)"></p>
             <a
               [routerLink]="['/noticia', item.slug]"
               class="btn btn-outline-danger"
@@ -106,6 +100,8 @@
           </div>
         </div>
       </div>
+
+      }
     </div>
     }
     <div class="container col-12">

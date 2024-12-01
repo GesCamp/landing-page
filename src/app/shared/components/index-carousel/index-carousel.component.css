@@ -83,8 +83,9 @@
 }
 
 .igx-slide img {
+  background-color: red;
   object-fit: fill;
-  max-width: 100%;
+  max-width: 1000px;
   height: 100%; /* Asumiendo que querías 50px, ya que '50' no es una unidad válida */
 }
 

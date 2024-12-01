@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
-import { PrincipalCarouselService } from '../../../services/principal-carousel';
+import {
+  ImageDetailsDto,
+  PrincipalCarouselService,
+} from '../../../services/principal-carousel';
+import { catchError, firstValueFrom, of, tap } from 'rxjs';
 @Component({
   selector: 'app-index-carousel',
   standalone: true,
@@ -11,8 +15,8 @@ import { PrincipalCarouselService } from '../../../services/principal-carousel';
 })
 export class IndexCarouselComponent implements OnInit {
   principalCarousel: any[] = [];
-  imagesWithLinks: { src: string; id: number; link: string; alt: string }[] =
-    [];
+  imagesWithLinks: ImageDetailsDto[] = [];
+
   currentImageIndex: number = 0;
 
   constructor(
@@ -25,39 +29,18 @@ export class IndexCarouselComponent implements OnInit {
 
   async loadPrincipalCarousel(): Promise<void> {
     const id = 'principal';
-    (await this.getPrincipalCarousel.getPrincipalBanner(id)).subscribe(
-      (data) => {
-        this.extractImagesAndLinks(data);
-      },
-      (error) => {
-        console.error('Ocurrió un error al obtener los datos:', error);
-      }
-    );
-  }
-  extractImagesAndLinks(data: any): void {
-    this.imagesWithLinks = [];
 
-    data.forEach((item1: any) => {
-      if (item1.content && item1.content.rendered) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(item1.content.rendered, 'text/html');
-
-        doc.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
-          const href = a.getAttribute('href');
-          a.querySelectorAll('img').forEach((img: HTMLImageElement) => {
-            const src = img.getAttribute('src');
-            const alt = img.getAttribute('alt') || 'Imagen sin descripción';
-            if (src && href) {
-              this.imagesWithLinks.push({
-                src,
-                link: href,
-                alt,
-                id: 0,
-              });
-            }
-          });
-        });
-      }
-    });
+    this.getPrincipalCarousel
+      .getPrincipalBanner(id)
+      .pipe(
+        tap((images) => {
+          this.imagesWithLinks = images;
+        }),
+        catchError((error) => {
+          console.error('Error al obtener las imágenes:', error);
+          return of([]);
+        })
+      )
+      .subscribe();
   }
 }

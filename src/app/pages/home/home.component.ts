@@ -16,6 +16,7 @@ import { ContactFormComponent } from './components/forms/contact-form/contact-fo
 import { PostulationFormComponent } from './components/forms/postulation-form/postulation-form.component';
 import { GetAllPostsDto } from '../../services/post/get-all-posts/dtos';
 import { tap } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -49,7 +50,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private datePipe: DatePipe,
     private readonly getPostsService: GetAllPostsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly getToken: AuthService
   ) {}
 
   posts: GetAllPostsDto[] = [];
@@ -70,7 +72,6 @@ export class HomeComponent implements OnInit {
       .pipe(
         tap({
           next: ({ posts }) => {
-            console.log(posts);
             this.posts = posts;
             this.isLoading = false;
           },

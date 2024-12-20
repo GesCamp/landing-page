@@ -1,3 +1,4 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* Reglas de estilo para el cuerpo */
 body {
@@ -79,3 +80,26 @@ body {
 }
 
 /* Otros estilos personalizados que tengas */
+
+.mat-snack-bar-primary .mdc-snackbar__surface {
+  background-color: rgb(26,87,149)!important;
+  color: white!important;
+}
+
+.mat-snack-bar-warning .mdc-snackbar__surface{
+  background-color: #ff9800!important;
+  color: black;
+}
+.mat-snack-bar-success .mdc-snackbar__surface {
+  background-color: green!important;
+  color: white!important;
+}
+.mat-snack-bar-error .mdc-snackbar__surface{
+  background-color: #f44336!important;
+  color: white;
+}
+
+.mat-snack-bar-container{
+  padding-top: 72px;
+  margin-top: 65px!important;
+}

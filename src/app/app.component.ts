@@ -7,6 +7,7 @@ import { DirectoryComponent } from './pages/companies/company/directory/director
 import { CompaniesComponent } from './pages/companies/companies/companies.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PostsComponent } from './pages/home/components/posts/posts.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { PostsComponent } from './pages/home/components/posts/posts.component';
     CompaniesComponent,
     HomeComponent,
     PostsComponent,
+    MatSnackBarModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

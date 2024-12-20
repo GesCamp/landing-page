@@ -8,11 +8,21 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormsService } from '../../../../../services';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMPTY, catchError, filter, tap } from 'rxjs';
+import { SnackBarService } from '../../../../../services/commons/snack-bar/snack-bar.service';
+import { SnackBarsColors } from '../../../../../services/commons/snack-bar/enums';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FloatInputComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FloatInputComponent,
+    MatSnackBarModule,
+  ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.css',
 })
@@ -20,10 +30,10 @@ export class ContactFormComponent {
   contactForm!: FormGroup;
   responseData: any;
   submissionStatus: string = '';
-  private formsService = inject(FormsService);
+  readonly #snackBarService = inject(SnackBarService);
+  readonly #formsService = inject(FormsService);
 
-  // form id
-  formId = 123;
+  formId = 31;
 
   constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
@@ -31,11 +41,52 @@ export class ContactFormComponent {
       email: ['', [Validators.required, Validators.email]],
       asunto: ['', Validators.required],
       celular: [
-        '+56', // Inicializa el input con +56
-        [Validators.required, Validators.pattern(/^\+56\d{9}$/)], // Valida que el input contenga +56 seguido de 9 dígitos
+        '+569',
+        [Validators.required, Validators.pattern(/^\+569\d{8}$/)],
       ],
       mensaje: ['', Validators.required],
     });
+
+    this.#formsService.success$
+      .pipe(
+        takeUntilDestroyed(),
+        tap(() =>
+          this.#snackBarService.show({
+            body: 'Formulario enviado con éxito',
+            color: SnackBarsColors.SUCCESS,
+            delay: 5000,
+          })
+        )
+      )
+      .subscribe();
+
+    this.#formsService.isLoading$
+      .pipe(
+        takeUntilDestroyed(),
+        filter(Boolean),
+        tap(() =>
+          this.#snackBarService.show({
+            body: 'Enviando formulario...',
+            color: SnackBarsColors.PRIMARY,
+            delay: 3000,
+          })
+        )
+      )
+      .subscribe();
+
+    this.#formsService.hasError$
+      .pipe(
+        takeUntilDestroyed(),
+        filter(Boolean),
+        tap(() =>
+          this.#snackBarService.show({
+            body: 'Ha ocurrido un error. Por favor, vuelve a intentarlo.',
+            color: SnackBarsColors.DANGER,
+            delay: 5000,
+          })
+        )
+      )
+      .subscribe();
   }
 
   onSubmit() {
@@ -64,30 +115,29 @@ export class ContactFormComponent {
 
       formData.append('_wpcf7_unit_tag', '0c6b143');
 
-      this.formsService.submitForm(this.formId, formData).subscribe(
-        (response) => {
-          this.responseData = response;
-          this.submissionStatus = 'Form submitted successfully!';
-          this.contactForm.reset();
-          this.contactForm.get('celular')?.setValue('+56'); // Reiniciar con el prefijo
-        },
-        (error) => {
-          console.error('Error submitting form', error);
-          this.submissionStatus = 'There was an error submitting the form.';
-        }
-      );
+      this.#formsService
+        .submitForm(this.formId, formData)
+        .pipe(
+          tap(() => {
+            this.contactForm.reset();
+            this.contactForm.get('celular')?.setValue('+569');
+          }),
+          catchError((error) => {
+            console.error('Error submitting form', error);
+            return EMPTY;
+          })
+        )
+        .subscribe();
     } else {
       console.warn('Form is invalid');
     }
   }
 
-  // Asegura que el prefijo +56 no se elimine
   enforcePrefix() {
     const celularControl = this.contactForm.get('celular');
     celularControl?.valueChanges.subscribe((value) => {
-      // Si el usuario selecciona todo y escribe, se mantiene el prefijo
-      if (!value.startsWith('+56')) {
-        celularControl.setValue('+56' + value.replace(/^\+56/, ''), {
+      if (!value.startsWith('+569')) {
+        celularControl.setValue('+569' + value.replace(/^\+569/, ''), {
           emitEvent: false,
         });
       }
@@ -97,8 +147,7 @@ export class ContactFormComponent {
   preventPrefixDeletion(event: KeyboardEvent) {
     const control = this.contactForm.get('celular');
     const cursorPosition = (event.target as HTMLInputElement).selectionStart;
-    if (cursorPosition !== null && cursorPosition <= 3) {
-      // Si el cursor está en la posición del prefijo, no permitir eliminarlo
+    if (cursorPosition !== null && cursorPosition <= 4) {
       if (event.key === 'Backspace' || event.key === 'Delete') {
         event.preventDefault();
       }

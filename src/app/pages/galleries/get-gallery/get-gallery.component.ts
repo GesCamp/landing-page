@@ -2,13 +2,18 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { GalleriesService } from '../../../services';
-import { GetGalleryBySlugDto } from '../../../services/features/gallery/dtos';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LinksHomeComponent } from '../../../shared/components/links-home/links-home.component';
 import { LoadingComponent } from '../../home/components/loading/loading.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageModalComponent } from './feature/image-modal';
+import {
+  GalleryInfoDto,
+  GetGalleryByIdDto,
+  ImageGalleryDto,
+  PaginationGalleryDto,
+} from '../../../services/features/gallery/dtos';
 
 @Component({
   selector: 'app-get-gallery',
@@ -24,14 +29,16 @@ import { ImageModalComponent } from './feature/image-modal';
   styleUrls: ['./get-gallery.component.css'],
 })
 export class GetGalleryComponent implements OnInit, OnDestroy {
-  gallery$: Observable<GetGalleryBySlugDto> | undefined;
-  gallery: GetGalleryBySlugDto | null = null;
+  gallery$: Observable<GetGalleryByIdDto> | undefined;
+  gallery: GalleryInfoDto | null = null;
+  dataImage: Readonly<ImageGalleryDto[]> | null = null;
   currentPage: number = 1;
   perPage: number = 30;
   totalPages: number = 1;
   isLoading: boolean = true;
-  slug!: string;
+  galleryId: number = 0;
   modalImage: string = '';
+  pagination: PaginationGalleryDto | null = null;
   private destroy$ = new Subject<void>();
   private modalService = inject(NgbModal);
 
@@ -44,23 +51,27 @@ export class GetGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-      this.slug = params['slug-galery'];
+      this.perPage;
+      this.galleryId = params['id'];
       this.loadGallery();
     });
   }
 
   loadGallery(): void {
     this.isLoading = true;
-    this.gallery$ = this.galleryService.getGalleryBySlug(
-      this.slug,
+    this.gallery$ = this.galleryService.getGalleryById(
+      this.galleryId,
       this.currentPage,
       this.perPage
     );
     this.subscription.add(
       this.gallery$.subscribe({
         next: (gallery) => {
-          this.gallery = gallery;
-          this.totalPages = gallery.total_pages;
+          console.log(gallery.gallery);
+          this.gallery = gallery.gallery;
+          this.dataImage = gallery.images;
+          this.pagination = gallery.pagination;
+          this.totalPages = gallery.pagination.total_pages;
           this.isLoading = false;
         },
         error: (err) => {

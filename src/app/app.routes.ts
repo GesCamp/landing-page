@@ -70,7 +70,7 @@ export const routes: Routes = [
         component: GetAllGalleriesComponent,
       },
       {
-        path: ':slug-galery',
+        path: ':id',
         component: GetGalleryComponent,
         resolve: {
           gallery: GetGalleryResolver,

@@ -32,3 +32,10 @@ p span{
     width: 100%;
     justify-content: center;
   }
+
+  .gallery-description{
+    justify-content: center;
+    p{
+      text-align: center;
+    }
+  }

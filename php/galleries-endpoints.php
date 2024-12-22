@@ -71,15 +71,20 @@ function get_nextgen_galleries($data) {
         return new WP_Error('no_galleries', 'No se encontraron galerías', array('status' => 404));
     }
 
-    // Agregar una imagen aleatoria de cada galería
+    // Agregar información adicional para cada galería
     foreach ($results as &$gallery) {
         // Obtener una imagen aleatoria de la galería
         $random_image = get_random_image_from_gallery($gallery->gid, $gallery->path);
-        if ($random_image) {
-            $gallery->random_image = $random_image;
-        } else {
-            $gallery->random_image = null;
-        }
+
+        // Obtener la fecha de la primera imagen asociada a la galería
+        $image_date = $wpdb->get_var($wpdb->prepare(
+            "SELECT imagedate FROM {$wpdb->prefix}ngg_pictures WHERE galleryid = %d ORDER BY imagedate ASC LIMIT 1",
+            $gallery->gid
+        ));
+
+        // Asignar información a la galería
+        $gallery->random_image = $random_image ? $random_image : null;
+        $gallery->image_date = $image_date ? $image_date : null;
     }
 
     // Paginación: obtener el total de galerías
@@ -97,6 +102,7 @@ function get_nextgen_galleries($data) {
         ),
     ));
 }
+
 
 function get_random_image_from_gallery($gallery_id, $gallery_path) {
     global $wpdb;
@@ -140,6 +146,7 @@ function get_nextgen_gallery_images($data) {
         $per_page // Limit
     ));
 
+    // Obtener los datos de la galería
     $gallery = $wpdb->get_row($wpdb->prepare(
         "SELECT * FROM `6jgrG0_ngg_gallery` WHERE gid = %d LIMIT 1",
         $gallery_id
@@ -153,31 +160,43 @@ function get_nextgen_gallery_images($data) {
         return new WP_Error('no_gallery', 'No se encontró la galería especificada', array('status' => 404));
     }
 
-    $gallery_path = home_url( $gallery->path );
+    // Construir la URL base de la galería
+    $gallery_path = home_url($gallery->path);
+
     // Agregar URL para cada imagen
     $images = array();
     foreach ($results as $image) {
         $images[] = array(
             'id' => $image->pid,
             'title' => $image->title,
-            'url' => $gallery_path . $image->filename, // Obtiene la URL de la imagen
-            'slug'=> $image->image_slug,
-            'description'=> $image->description,
-            'altText'=> $image->alttext,
-            'imageDate'=> $image->imagedate
+            'url' => $gallery_path . '/' . $image->filename, // Obtiene la URL de la imagen
+            'slug' => $image->image_slug,
+            'description' => $image->description,
+            'altText' => $image->alttext,
+            'imageDate' => $image->imagedate
         );
     }
 
+    // Obtener la fecha de cualquier imagen (en este caso, la primera imagen)
+    $gallery_date = isset($results[0]->imagedate) ? $results[0]->imagedate : null;
+
     // Paginación: obtener el total de imágenes
     $total_images = $wpdb->get_var($wpdb->prepare(
-        "SELECT COUNT(*) FROM `6jgrG0_ngg_pictures` WHERE galleryId = %d",
+        "SELECT COUNT(*) FROM `6jgrG0_ngg_pictures` WHERE galleryid = %d",
         $gallery_id
     ));
     $total_pages = ceil($total_images / $per_page);
 
-    // Añadir información de paginación
+    // Añadir información de paginación y datos de la galería
     return rest_ensure_response(array(
-        'data' => $images,
+        'gallery' => array(
+            'id' => $gallery->gid,
+            'title' => $gallery->title,
+            'description' => $gallery->galdesc,
+            'path' => $gallery_path,
+            'date' => $gallery_date, // Fecha tomada de la primera imagen
+        ),
+        'images' => $images,
         'pagination' => array(
             'total' => $total_images,
             'per_page' => $per_page,
@@ -186,6 +205,8 @@ function get_nextgen_gallery_images($data) {
         ),
     ));
 }
+
+
 
 
 

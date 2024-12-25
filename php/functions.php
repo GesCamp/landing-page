@@ -165,7 +165,5 @@ endif;
 // crear un formulario de postulacion
 require_once get_template_directory() . '/contact-form.php';
 
-// add enpoints de galerias
+// endpoints de galerias
 require_once get_template_directory() . '/galleries-endpoints.php';
-
-

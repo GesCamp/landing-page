@@ -7,6 +7,10 @@ import {
 } from '@angular/forms';
 import { FormsService } from '../../../../../services';
 import { CommonModule } from '@angular/common';
+import { EMPTY, catchError, map, of, tap } from 'rxjs';
+import { SnackBarService } from '../../../../../services/commons/snack-bar/snack-bar.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SnackBarsColors } from '../../../../../services/commons/snack-bar/enums';
 
 @Component({
   selector: 'app-postulation-form',
@@ -19,19 +23,52 @@ export class PostulationFormComponent {
   infoForm: FormGroup;
   responseData: any;
   submissionStatus: string = '';
-  private formsService = inject(FormsService);
+  readonly #snackBarService = inject(SnackBarService);
+  readonly #formsService = inject(FormsService);
 
-  formId = 94;
+  formId = 30;
 
   constructor(private fb: FormBuilder) {
     this.infoForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
+
+    this.#formsService.success$.pipe(
+      takeUntilDestroyed(),
+      tap(() =>
+        this.#snackBarService.show({
+          body: 'Formulario enviado con éxito',
+          color: SnackBarsColors.SUCCESS,
+          delay: 5000,
+        })
+      )
+    );
+
+    this.#formsService.isLoading$.pipe(
+      takeUntilDestroyed(),
+      tap(() =>
+        this.#snackBarService.show({
+          body: 'Enviando formulario...',
+          color: SnackBarsColors.PRIMARY,
+          delay: 3000,
+        })
+      )
+    );
+
+    this.#formsService.hasError$.pipe(
+      takeUntilDestroyed(),
+      tap(() =>
+        this.#snackBarService.show({
+          body: 'Ha ocurrido un error. Por favor, vuelve a intentarlo.',
+          color: SnackBarsColors.DANGER,
+          delay: 5000,
+        })
+      )
+    );
   }
 
   onSubmit() {
-    console.log('Form submitted'); // Asegúrate de que esta línea se ejecute
     if (this.infoForm.valid) {
       const formData = new FormData();
       formData.append('your-name', this.infoForm.get('name')?.value || '');
@@ -39,17 +76,17 @@ export class PostulationFormComponent {
 
       formData.append('_wpcf7_unit_tag', '0c6b143');
 
-      this.formsService.submitForm(this.formId, formData).subscribe(
-        (response) => {
-          this.responseData = response;
-          this.submissionStatus = 'Form submitted successfully!';
-          this.infoForm.reset();
-        },
-        (error) => {
-          console.error('Error submitting form', error);
-          this.submissionStatus = 'There was an error submitting the form.';
-        }
-      );
+      this.#formsService
+        .submitForm(this.formId, formData)
+        .pipe(
+          tap(() => {
+            this.infoForm.reset();
+          }),
+          catchError((error) => {
+            return EMPTY;
+          })
+        )
+        .subscribe();
     } else {
       console.warn('Form is invalid');
     }

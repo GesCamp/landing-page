@@ -6,23 +6,26 @@
       <app-loading></app-loading>
       }@else {
       <h3>{{ gallery?.title }}</h3>
-      <div class="details">
-        <div class="sub-detail">
+      <div class="gallery-description">
+        <p>{{ gallery?.description }}</p>
+      </div>
+      <div class="row details col-lg-12">
+        <div class="sub-detail col-lg-8">
           <p>
             Publicado el:
-            <span>{{ gallery?.publication_date }}</span>
+            <span>{{ gallery?.date }}</span>
           </p>
         </div>
-        <div class="sub-detail">
+        <div class="sub-detail col-lg-4">
           <p>
             Esta galería contiene:
-            <span>{{ gallery?.total_images }}</span>
+            <span>{{ pagination?.total }}</span>
             imágenes.
           </p>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-md-3 g-40 mt-3">
-        @if(gallery?.images){ @for(image of gallery?.images; track image.id){
+        @for(image of dataImage; track image.id){
         <div class="col">
           <div
             class="image-card shadow-lg mb-5 bg-body"
@@ -40,23 +43,26 @@
             </div>
           </div>
         </div>
-        }}
+        }
       </div>
       <div class="pagination">
         <button
           type="button"
           class="btn btn-outline-warning page-link"
           (click)="previousPage()"
-          [disabled]="currentPage === 1"
+          [disabled]="pagination?.current_page === 1"
         >
           Anterior
         </button>
-        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <span
+          >Página {{ pagination?.current_page }} de
+          {{ pagination?.total_pages }}</span
+        >
         <button
           type="button"
           class="btn btn-outline-warning page-link"
           (click)="nextPage()"
-          [disabled]="currentPage === totalPages"
+          [disabled]="pagination?.current_page === pagination?.total_pages"
         >
           Siguiente
         </button>

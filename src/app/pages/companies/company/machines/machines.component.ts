@@ -79,10 +79,4 @@ export class MachinesComponent implements OnInit {
 
     return images;
   }
-
-  viewMachines: ViewMachines = {
-    name: 'B-1',
-    description: 'Superinendente Abelardo Ortega Manriquez',
-    patent: 'zz zz 25',
-  };
 }

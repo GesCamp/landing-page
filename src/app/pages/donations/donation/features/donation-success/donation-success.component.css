@@ -1,0 +1,7 @@
+.success-message-container{
+    justify-content: center;
+    text-align: center;
+    a{
+        text-decoration: none;
+    }
+}

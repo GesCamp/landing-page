@@ -38,9 +38,9 @@ export class GetGalleriesComponent implements OnInit, OnDestroy {
     );
     this.subscription.add(
       this.galleries$.subscribe({
-        next: ({ galleries, total_pages }) => {
-          this.galleries = galleries;
-          this.totalPages = total_pages;
+        next: ({ data, pagination }) => {
+          this.galleries = data;
+          this.totalPages = pagination.total_pages;
           this.isLoading = false;
         },
         error: (err) => {

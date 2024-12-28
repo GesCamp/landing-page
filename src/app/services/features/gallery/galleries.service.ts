@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environments } from '../../environments';
 import { ApiTag } from '../../environments/api-tag/api-tag.enum';
-import { GetAllGalleriesDto, GetGalleryBySlugDto } from './dtos';
+import { GetAllGalleriesDto, GetGalleryByIdDto } from './dtos';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +22,19 @@ export class GalleriesService {
   }
 
   // Obtener una galería por ID
-  getGalleryById(id: number): Observable<any> {
+  getGalleryById(
+    id: number,
+    page: number = 1,
+    perPage: number = 30
+  ): Observable<any> {
     return this.http.get<any>(
-      `${environments.baseBomberosMalalhueUrl}${ApiTag.GALLERIES}/${id}`
+      `${environments.baseBomberosMalalhueUrl}${ApiTag.GALLERY}/${id}`,
+      {
+        params: {
+          page: page,
+          per_page: perPage,
+        },
+      }
     );
   }
 
@@ -45,8 +55,8 @@ export class GalleriesService {
     slug: string,
     page: number = 1,
     perPage: number = 9
-  ): Observable<GetGalleryBySlugDto> {
-    return this.http.get<GetGalleryBySlugDto>(
+  ): Observable<GetGalleryByIdDto> {
+    return this.http.get<GetGalleryByIdDto>(
       `${environments.baseBomberosMalalhueUrl}${ApiTag.GALLERIES}/slug/${slug}`,
       {
         params: {

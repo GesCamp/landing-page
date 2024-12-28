@@ -13,6 +13,9 @@ import { PostResolver } from './pages/home/components/post/post.resolver';
 import { GetAllGalleriesComponent } from './pages/galleries/get-all-galleries/get-all-galleries.component';
 import { GetGalleryComponent } from './pages/galleries/get-gallery/get-gallery.component';
 import { GetGalleryResolver } from './pages/galleries/get-gallery/get-gallery.resolver';
+import { DonationComponent } from './pages/donations/donation/donation.component';
+import { DonationSuccessComponent } from './pages/donations/donation/features/donation-success/donation-success.component';
+import { DonationErrorComponent } from './pages/donations/donation/features/donation-error/donation-error.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -70,11 +73,28 @@ export const routes: Routes = [
         component: GetAllGalleriesComponent,
       },
       {
-        path: ':slug-galery',
+        path: ':id',
         component: GetGalleryComponent,
         resolve: {
           gallery: GetGalleryResolver,
         },
+      },
+    ],
+  },
+  {
+    path: 'donaciones',
+    children: [
+      {
+        path: '',
+        component: DonationComponent,
+      },
+      {
+        path: 'success',
+        component: DonationSuccessComponent,
+      },
+      {
+        path: 'error',
+        component: DonationErrorComponent,
       },
     ],
   },

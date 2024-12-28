@@ -1,0 +1,82 @@
+#donations {
+    justify-content: center;
+}
+
+.donation-section {
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-donations {
+    justify-content: center;
+
+    h1 {
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.2rem;
+        text-align: center;
+        color: darkgrey;
+    }
+}
+
+.cards-descriptions {
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Espaciado mejorado */
+
+    .card-description {
+        font-weight: 700;
+        color: aliceblue;
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #e42311, #cd4d3d);
+        border-radius: 10px;
+        margin: .5rem;
+        min-height: 12rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-description:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    span {
+        color: #24dde7;
+    }
+}
+
+
+.cards-pay {
+    .card-pay {
+        width: 90%;
+        font-size: 1.5rem;
+        max-width: 16rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .cards-descriptions {
+        padding: 0rem 0rem;
+        flex-direction: column;
+        gap: 0.5rem; /* Espaciado mayor en pantallas pequeñas */
+      }
+      .card-pay{
+        width: 100%;
+        max-width: 500px!important;
+      }
+}

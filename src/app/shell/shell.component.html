@@ -162,8 +162,19 @@
       <div class="col-md-6 text-center">
         <h4>Sé parte de nosotros</h4>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-white">Postular</a></li>
-          <li><a href="#" class="text-white">Contáctanos</a></li>
+          <li>
+            <a
+              [routerLink]="['/inicio']"
+              fragment="postulation"
+              class="text-white"
+              >Postular</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/inicio']" fragment="contact" class="text-white"
+              >Contáctanos</a
+            >
+          </li>
           <li><a href="#" class="text-white">Donar a bomberos Malalhue</a></li>
         </ul>
       </div>

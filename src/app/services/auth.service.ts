@@ -13,13 +13,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   authenticate(): Observable<any> {
-    const body = { username: 'user', password: 'CbMalalhue_2024!' };
+    const body = {
+      username: environments.wp_username,
+      password: environments.wp_password,
+    };
     return this.http.post<any>(environments.authUrl, body).pipe(
       tap((response) => {
-        const token = response?.data?.token ?? null; // Asignar null si no existe el token
+        const token = response?.data?.token ?? null;
         if (token) {
           this.token = token;
-          localStorage.setItem('authToken', this.token ?? ''); // Asegúrate de que `this.token` no sea `null`
+          localStorage.setItem('authToken', this.token ?? '');
         } else {
           console.warn('No se encontró un token en la respuesta');
           localStorage.removeItem('authToken');

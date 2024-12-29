@@ -18,7 +18,8 @@
   color: red !important;
   border-bottom: 2px solid red;
 }
-.badge{
+
+.badge {
   color: white
 }
 
@@ -37,7 +38,8 @@
 }
 
 .picsum-img-wrapper {
-  max-height: 80vh; /* Altura fija para el contenedor */
+  max-height: 80vh;
+  /* Altura fija para el contenedor */
   overflow: hidden;
   position: relative;
   margin-top: -64px;
@@ -45,14 +47,17 @@
 
 .parallax-img {
   transform: translate3d(0, 0, 0);
-  will-change: transform; /* Optimiza la animación */
+  will-change: transform;
+  /* Optimiza la animación */
 }
 
 .sticky-nav {
   position: sticky;
   top: 0;
-  z-index: 1000; /* Esto asegura que la barra de navegación esté encima del resto del contenido */
-  background-color: #fff; /* O cualquier otro color que desees para el fondo */
+  z-index: 1000;
+  /* Esto asegura que la barra de navegación esté encima del resto del contenido */
+  background-color: #fff;
+  /* O cualquier otro color que desees para el fondo */
   /* border-bottom: 3px solid red; */
 }
 
@@ -82,38 +87,74 @@
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .contact-tarjet h4 {
-      font-size: 1.5rem;
-      /* ... otros estilos ... */
+    font-size: 1.5rem;
+    /* ... otros estilos ... */
+  }
+
+  .donations-card .btn {
+    padding-top: .5rem !important;
   }
 }
 
-.spinners{
+.spinners {
   align-content: center;
   justify-content: center;
   text-align: center;
 }
-.spinners div{
+
+.spinners div {
   text-align: center;
   margin: 0rem 0.2rem;
 }
-.galleries{
+
+.galleries {
   width: 100%;
   text-align: center;
 }
 
-#ayudanos i{
-  color: #00c4d9;
+.novedades {
+  .body-card-novedades {
+    h4 {
+      margin-top: 0rem !important;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-top: 0rem !important;
+      padding-top: 0rem!important;
+      padding-bottom: 0rem;
+    }
+
+    a{
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+#ayudanos i {
+  color: #d90000;
 }
 
 
-#ayudanos{
-  .card-container{
-    justify-content: center!important;
+#ayudanos {
+  .card-container {
+    justify-content: center !important;
   }
 
-  .donations-card{
-    padding: auto;
+  .donations-card {
     margin: 1rem auto;
     text-align: center;
+    justify-items: center;
+
+    .btn {
+      height: 6rem !important;
+      text-align: justify;
+      font-size: 1.5rem;
+      padding-top: 2rem;
+    }
+
+    .btn:hover {
+      color: #fff;
+    }
   }
 }

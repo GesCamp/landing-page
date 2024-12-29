@@ -11,7 +11,6 @@
 
 .header-donations {
     justify-content: center;
-
     h1 {
         text-align: center;
     }
@@ -24,12 +23,12 @@
 }
 
 .cards-descriptions {
+    text-align: center;
     margin: 0 auto;
-    padding: 5rem 2rem;
+    padding: 5rem auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem; /* Espaciado mejorado */
 
     .card-description {
         font-weight: 700;
@@ -37,7 +36,7 @@
         padding: 4rem 2rem;
         background: linear-gradient(135deg, #e42311, #cd4d3d);
         border-radius: 10px;
-        margin: .5rem;
+        margin: .5rem 0rem;
         min-height: 12rem;
         justify-content: center;
         align-items: center;
@@ -58,25 +57,41 @@
 
 
 .cards-pay {
-    .card-pay {
-        width: 90%;
-        font-size: 1.5rem;
-        max-width: 16rem;
+    .body-cards{
+        margin: 0rem auto;
+        width: 100%;
     }
+   .card-pay{
+    margin: 1rem auto;
+    text-align: center;
+    justify-items: center;
 
-    a {
-        text-decoration: none;
+    .btn{
+      height: 6rem!important;
+      text-align: justify;
+      font-size: 1.5rem;
+      padding-top: 2rem;
     }
+    .btn:hover{
+      color: #fff;
+    }
+   }
 }
 
 @media (max-width: 768px) {
+    .header-donations h1{
+        font-size: 4rem;
+    }
     .cards-descriptions {
-        padding: 0rem 0rem;
+        padding: 0rem auto;
         flex-direction: column;
-        gap: 0.5rem; /* Espaciado mayor en pantallas pequeñas */
+      }
+      .card-description{
+        margin: none;
+        max-width: 100%;
       }
       .card-pay{
-        width: 100%;
+        max-width: 100%;
         max-width: 500px!important;
       }
 }

@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { ShellComponent } from './shell/shell.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DirectoryComponent } from './pages/companies/company/directory/directory.component';
-import { CompaniesComponent } from './pages/companies/companies/companies.component';
-import { HomeComponent } from './pages/home/home.component';
-import { PostsComponent } from './pages/home/components/posts/posts.component';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +26,19 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   menuOption: string = '';
+
+  constructor(private router: Router) {}
+  ngOnInit() {
+    // Escuchar los eventos de navegación para restaurar el scroll
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // Restaurar la posición del scroll a la parte superior en cada navegación
+        window.scrollTo(0, 0);
+      });
+  }
 
   onOption(menuOption: string) {
     this.menuOption = menuOption;

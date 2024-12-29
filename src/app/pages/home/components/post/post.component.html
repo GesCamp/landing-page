@@ -20,12 +20,9 @@
           </span>
         </div>
         <div class="col-12 d-flex flex-column position-static mb-2">
-          <h3 class="mb-1">{{ item.title.rendered }}</h3>
+          <h4 class="title-post">{{ item.title.rendered }}</h4>
           <div class="mb-1 text-muted">{{ item.date }}</div>
-          <div
-            class="mb-2 content-post"
-            [innerHTML]="item.content.rendered"
-          ></div>
+          <div class="content-post" [innerHTML]="item.content.rendered"></div>
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@
     @if(isLoading){
     <app-loading></app-loading>
     } @if(posts){
-    <div class="row">
+    <div class="row novedades">
       @for(item of posts; track item.id){
 
       <div class="col-12 col-md-6 col-lg-4">
@@ -86,12 +86,17 @@
           <div class="col-12 py-2">
             <span class="badge bg-danger mx-1">{{ item.category }}</span>
           </div>
-          <div class="col-12 d-flex flex-column position-static mb-2">
-            <h3 class="mb-1">
+          <div
+            class="body-card-novedades col-12 d-flex flex-column position-static mb-0"
+          >
+            <h4>
               {{ truncateText(item.title, 50) }}
-            </h3>
-            <div class="mb-1 text-muted">{{ formatData(item.date) }}</div>
-            <p class="mb-2" [innerHTML]="truncateText(item.excerpt, 90)"></p>
+            </h4>
+            <div class="date text-muted">{{ formatData(item.date) }}</div>
+            <p
+              class="text-novedades"
+              [innerHTML]="truncateText(item.excerpt, 90)"
+            ></p>
             <a
               [routerLink]="['/noticia', item.slug]"
               class="btn btn-outline-danger"
@@ -129,36 +134,38 @@
         </p>
       </div>
     </div>
-    <div class="card-container col-12">
-      <div class="donations-card">
+    <div class="card-container row col-12">
+      <div class="donations-card col-6">
         <a
           href="https://www.flow.cl/btn.php?token=ba75489f40f99311089f9bece858425f1c22bfda"
           target="_blank"
-          class="btn btn-warning btn-outline-info col-xl-6 col-md-12 text-light text-center"
+          class="btn btn-light btn-outline-danger col-xl-6 col-md-6 text-center"
           >Donar $2.000</a
         >
       </div>
-      <div class="donations-card">
+      <div class="donations-card col-6">
         <a
           href="https://www.flow.cl/btn.php?token=ybd76255289c0bfb6a02702c5c5f34b65d466bfe"
           target="_blank"
-          class="btn btn-warning btn-outline-info col-xl-6 col-md-12 text-light text-center"
+          class="btn btn-light btn-outline-danger col-xl-6 col-md-6 text-center"
           >Donar $5.000</a
         >
       </div>
-      <div class="donations-card">
+      <div class="donations-card col-6">
         <a
           href="https://www.flow.cl/btn.php?token=sb6e9cdcffd5697503f7fd91e6f723c2e14376c2"
           target="_blank"
-          class="btn btn-warning btn-outline-info col-xl-6 col-md-12 text-light text-center"
+          class="btn btn-light btn-outline-danger col-xl-6 col-md-12 text-center"
           >Donar $10.000</a
         >
       </div>
-      <a
-        [routerLink]="['/donaciones']"
-        class="btn btn-info btn-outline-warning col-12 text-light"
-        >Quiero donar</a
-      >
+      <div class="donations-card col-6">
+        <a
+          [routerLink]="['/donaciones']"
+          class="btn btn-light btn-outline-danger col-xl-6 col-md-12 text-center"
+          >Donar otro monto</a
+        >
+      </div>
     </div>
   </div>
 </section>

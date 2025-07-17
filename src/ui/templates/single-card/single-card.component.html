@@ -1,0 +1,33 @@
+@let slots = $slots() | asRecord;
+
+<div
+  class="overflow-hidden content-between w-full flex flex-col rounded-lg bg-amber-200"
+>
+  <div class="h-full content-between p-2">
+    @if (slots['header']; as header) {
+    <div
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      <ng-container [ngTemplateOutlet]="header" />
+      <app-divider />
+    </div>
+    }
+
+    <div>
+      <ng-content />
+    </div>
+
+    @if(slots['footer']; as footer){
+    <div class="mb-0">
+      <app-divider />
+      <ng-container [ngTemplateOutlet]="footer" />
+    </div>
+    }
+  </div>
+
+  @if($addBottonLine()){
+  <div
+    class="h-1 w-full mb-0 bg-linear-to-r from-gray-400 bg-primary to-50%"
+  ></div>
+  }
+</div>

@@ -1,0 +1,22 @@
+<section class="backdrop-blur-xs fixed bottom-0 z-0 block w-full bg-white/50 shadow-sm md:hidden">
+    <div class="flex justify-between text-xs font-semibold text-gray-600">
+
+      @if (buttonNavbar) {
+        
+        @for (item of buttonNavbar ; track $index) {
+          <button  
+          class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800"
+          >
+            <app-icon>
+              {{item.icon}}
+            </app-icon>
+            <span class="">
+              {{item.title}}
+            </span>
+          </button>
+        }
+        
+      } 
+    </div>
+  </section>
+  

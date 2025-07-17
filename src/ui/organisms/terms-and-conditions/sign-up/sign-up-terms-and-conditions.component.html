@@ -1,0 +1,47 @@
+<app-button data-modal-target="default-modal" data-modal-toggle="default-modal" impact="none" tone="primary" shape="rounded" size="small" showModal="true" (buttonClick)="openModal()"> Términos y condiciones. </app-button>
+
+@if(showModal){
+  <div 
+  id="default-modal" 
+  tabindex="-1" 
+  aria-hidden="true" 
+  class="fixed inset-0 z-50 bg-black/50 overflow-y-auto px-4 py-10"
+  (click)="closeModal()"
+  >
+  <div class="max-w-2xl mx-auto">
+    <app-modal (close)="closeModal()">
+
+      <ng-template app-slot="header">
+        <h3 class="font-bold text-foreground">Términos y condiciones</h3>
+      </ng-template>
+      <h1 class="mt-2 font-bold mb-0 text-foreground">1. Aceptación de los Términos</h1>
+      <p class="font-light text-foreground">Al crear una cuenta en nuestro sistema de backoffice, el usuario acepta cumplir con estos Términos y Condiciones, así como con cualquier política adicional publicada por la empresa.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">2. Uso Autorizado</h1>
+      <p class="font-light text-foreground">El sistema de backoffice está destinado exclusivamente para uso interno y autorizado. Cada cuenta es personal e intransferible. El usuario se compromete a utilizarla únicamente con fines laborales y conforme a las funciones asignadas por la empresa.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">3. Registro de Cuenta</h1>
+      <p class="font-light text-foreground">El usuario deberá proporcionar información precisa, actualizada y completa al registrarse. La empresa se reserva el derecho de rechazar el registro o desactivar cuentas que contengan información falsa o inexacta.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">4. Responsabilidad sobre las Credenciales</h1>
+      <p class="font-light text-foreground">El usuario es responsable de mantener la confidencialidad de su nombre de usuario y contraseña. Cualquier actividad realizada desde la cuenta será considerada como realizada por el titular.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">5. Confidencialidad y Protección de Datos</h1>
+      <p class="font-light text-foreground">Toda la información a la que el usuario acceda a través del sistema backoffice es confidencial y de uso exclusivo interno. Está prohibida su divulgación, reproducción o uso con fines no autorizados.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">6. Propiedad Intelectual</h1>
+      <p class="font-light text-foreground">Todos los contenidos, diseños y funciones del sistema backoffice son propiedad de la empresa. El usuario no adquiere ningún derecho sobre ellos por el mero uso del sistema.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">7. Suspensión o Eliminación de Cuentas</h1>
+      <p class="font-light text-foreground">La empresa podrá suspender o eliminar cuentas de usuario en caso de incumplimiento de los presentes términos, uso indebido del sistema o por decisión administrativa interna.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">8. Modificaciones</h1>
+      <p class="font-light text-foreground">La empresa se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor desde su publicación. Se notificará a los usuarios cuando esto ocurra.</p>
+
+      <h1 class="mt-2 font-bold mb-0 text-foreground">9. Legislación Aplicable</h1>
+      <p class="font-light text-foreground">Estos términos se rigen por las leyes vigentes en el país donde opera la empresa. Cualquier controversia será resuelta en los tribunales competentes de dicha jurisdicción.</p>
+    </app-modal>
+  </div>
+  </div>
+    
+}

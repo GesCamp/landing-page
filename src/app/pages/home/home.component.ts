@@ -17,22 +17,24 @@ import { PostulationFormComponent } from './components/forms/postulation-form/po
 import { GetAllPostsDto } from '../../services/post/get-all-posts/dtos';
 import { tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { CardComponent } from '../../../ui';
 
 @Component({
-    selector: 'app-home',
-    imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        IndexCarouselComponent,
-        LoadingComponent,
-        GetGalleriesComponent,
-        ContactFormComponent,
-        PostulationFormComponent,
-    ],
-    providers: [DatePipe],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+  selector: 'app-home',
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    IndexCarouselComponent,
+    LoadingComponent,
+    GetGalleriesComponent,
+    ContactFormComponent,
+    PostulationFormComponent,
+    CardComponent,
+  ],
+  providers: [DatePipe],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   isLoading: boolean = true;

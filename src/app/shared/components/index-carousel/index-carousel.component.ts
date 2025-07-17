@@ -7,11 +7,10 @@ import {
 } from '../../../services/principal-carousel';
 import { catchError, firstValueFrom, of, tap } from 'rxjs';
 @Component({
-  selector: 'app-index-carousel',
-  standalone: true,
-  imports: [CommonModule, IgxCarouselModule, IgxSliderModule],
-  templateUrl: './index-carousel.component.html',
-  styleUrl: './index-carousel.component.css',
+    selector: 'app-index-carousel',
+    imports: [CommonModule, IgxCarouselModule, IgxSliderModule],
+    templateUrl: './index-carousel.component.html',
+    styleUrl: './index-carousel.component.css'
 })
 export class IndexCarouselComponent implements OnInit {
   principalCarousel: any[] = [];

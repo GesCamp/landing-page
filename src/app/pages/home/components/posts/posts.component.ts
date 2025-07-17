@@ -8,12 +8,11 @@ import { LinksHomeComponent } from '../../../../shared/components/links-home/lin
 import { GetAllPostsDto } from '../../../../services/post/get-all-posts/dtos';
 
 @Component({
-  standalone: true,
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css'],
-  providers: [DatePipe],
-  imports: [CommonModule, LoadingComponent, RouterModule, LinksHomeComponent],
+    selector: 'app-posts',
+    templateUrl: './posts.component.html',
+    styleUrls: ['./posts.component.css'],
+    providers: [DatePipe],
+    imports: [CommonModule, LoadingComponent, RouterModule, LinksHomeComponent]
 })
 export class PostsComponent implements OnInit, OnDestroy {
   posts: GetAllPostsDto[] = [];

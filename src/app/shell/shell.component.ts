@@ -9,11 +9,10 @@ import {
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  standalone: true,
-  selector: 'app-shell',
-  templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.css'],
-  imports: [RouterModule, RouterOutlet, CommonModule, NgbModule],
+    selector: 'app-shell',
+    templateUrl: './shell.component.html',
+    styleUrls: ['./shell.component.css'],
+    imports: [RouterModule, RouterOutlet, CommonModule, NgbModule]
 })
 export class ShellComponent {
   constructor(private router: Router) {

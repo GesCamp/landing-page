@@ -12,11 +12,10 @@ import { CardInterfaceDto } from '../../../../shared/interfaces/card-volunteer.d
 import { DirectoryDto } from '../../../../shared/interfaces/directory.dto';
 import { ApiTag } from '../../../../services/environments/api-tag/api-tag.enum';
 @Component({
-  standalone: true,
-  selector: 'app-directory',
-  templateUrl: './directory.component.html',
-  styleUrls: ['./directory.component.css'],
-  imports: [LinksStaffComponent, LinksHomeComponent, CommonModule],
+    selector: 'app-directory',
+    templateUrl: './directory.component.html',
+    styleUrls: ['./directory.component.css'],
+    imports: [LinksStaffComponent, LinksHomeComponent, CommonModule]
 })
 export class DirectoryComponent implements OnInit {
   items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];

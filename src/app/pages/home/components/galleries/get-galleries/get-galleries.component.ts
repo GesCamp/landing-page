@@ -10,11 +10,10 @@ import { LoadingComponent } from '../../loading/loading.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
-  selector: 'app-get-galleries',
-  templateUrl: './get-galleries.component.html',
-  styleUrls: ['./get-galleries.component.css'],
-  imports: [CommonModule, LoadingComponent, RouterModule],
+    selector: 'app-get-galleries',
+    templateUrl: './get-galleries.component.html',
+    styleUrls: ['./get-galleries.component.css'],
+    imports: [CommonModule, LoadingComponent, RouterModule]
 })
 export class GetGalleriesComponent implements OnInit, OnDestroy {
   galleries$: Observable<GetAllGalleriesDto> | undefined;

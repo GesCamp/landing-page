@@ -4,11 +4,10 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  selector: 'app-links-home',
-  templateUrl: './links-home.component.html',
-  styleUrls: ['./links-home.component.css'],
-  imports: [CommonModule, IgxCarouselModule, IgxSliderModule],
+    selector: 'app-links-home',
+    templateUrl: './links-home.component.html',
+    styleUrls: ['./links-home.component.css'],
+    imports: [CommonModule, IgxCarouselModule, IgxSliderModule]
 })
 export class LinksHomeComponent implements OnInit {
   bannersAndPromotions: any[] = [];

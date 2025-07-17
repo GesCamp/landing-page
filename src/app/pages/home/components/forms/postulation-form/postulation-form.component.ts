@@ -13,11 +13,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SnackBarsColors } from '../../../../../services/commons/snack-bar/enums';
 
 @Component({
-  selector: 'app-postulation-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './postulation-form.component.html',
-  styleUrl: './postulation-form.component.css',
+    selector: 'app-postulation-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './postulation-form.component.html',
+    styleUrl: './postulation-form.component.css'
 })
 export class PostulationFormComponent {
   infoForm: FormGroup;

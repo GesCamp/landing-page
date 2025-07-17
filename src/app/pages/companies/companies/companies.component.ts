@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  standalone: true,
-  selector: 'app-companies',
-  templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css'],
-  imports: [RouterLink],
+    selector: 'app-companies',
+    templateUrl: './companies.component.html',
+    styleUrls: ['./companies.component.css'],
+    imports: [RouterLink]
 })
 export class CompaniesComponent {
   parallax() {

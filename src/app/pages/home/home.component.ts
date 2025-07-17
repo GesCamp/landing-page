@@ -19,21 +19,20 @@ import { tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    IndexCarouselComponent,
-    LoadingComponent,
-    GetGalleriesComponent,
-    ContactFormComponent,
-    PostulationFormComponent,
-  ],
-  providers: [DatePipe],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+    selector: 'app-home',
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        IndexCarouselComponent,
+        LoadingComponent,
+        GetGalleriesComponent,
+        ContactFormComponent,
+        PostulationFormComponent,
+    ],
+    providers: [DatePipe],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   isLoading: boolean = true;
